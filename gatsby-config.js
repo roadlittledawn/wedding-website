@@ -1,11 +1,13 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://brie-clinton-wedding.netlify.app",
     title: "Brie and Clinton Wedding Website",
+    titleTemplate: "%s | Brie and Clinton Wedding",
   },
   plugins: [
     "gatsby-plugin-emotion",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",

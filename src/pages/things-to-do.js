@@ -2,15 +2,15 @@ import React from "react";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 
-const HomePage = () => {
+const ThingsToDoPage = () => {
   return (
     <>
-      <SEO title="Brie and Clinton Wedding" />
+      <SEO title="Things to do" />
       <MainLayout>
-        <h1>Brie and Clinton Wedding Website</h1>
+        <h1>Things to do</h1>
       </MainLayout>
     </>
   );
 };
 
-export default HomePage;
+export default ThingsToDoPage;
