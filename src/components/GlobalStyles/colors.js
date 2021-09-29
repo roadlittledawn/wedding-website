@@ -25,6 +25,7 @@ export default css`
   --color-dark-800: #cedede;
   --color-dark-900: #e8eaea;
 
+  --color-red-200: #daa9a2;
   --color-red-400: #b55344;
 
   --color-orange-400: #ffc18c;
