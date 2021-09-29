@@ -10,3 +10,4 @@ export const wrapRootElement = ({ element }) => {
 };
 
 export { default as wrapPageElement } from "./gatsby/wrap-page-element";
+export { default as onPreRenderHTML } from "./gatsby/on-pre-render";
