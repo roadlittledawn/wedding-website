@@ -17,7 +17,8 @@ const Logo = ({ color }) => (
         margin-left: 0.25em;
       }
       @media screen and (max-width: ${siteOptions.layout.mobileBreakpoint}) {
-        font-size: 2em;
+        font-size: 7vw;
+        margin: 0.75em 1em 0 0;
       }
     `}
   >

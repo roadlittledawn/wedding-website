@@ -14,14 +14,18 @@ const HomePage = () => {
           css={css`
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
             > * {
-              margin: 2em 0;
+              margin: 2em;
             }
             @media screen and (max-width: ${siteOptions.layout
                 .mobileBreakpoint}) {
+              font-size: 10px;
               flex-direction: column;
+              > * {
+                margin: 0;
+              }
             }
           `}
         >
@@ -33,8 +37,7 @@ const HomePage = () => {
           >
             <div
               css={css`
-                width: 500px;
-                min-height: 530px;
+                max-width: 500px;
                 display: flex;
                 align-items: center;
                 flex-direction: row;
@@ -51,6 +54,9 @@ const HomePage = () => {
               >
                 <h1>
                   <img
+                    css={css`
+                      width: 100%;
+                    `}
                     src="https://flourish.theknot.com/lockup/initials?firstName=Brie&amp;fianceFirstName=Clinton&amp;themeId=1226&amp;liteSite=true"
                     alt="Brie &amp; Clinton"
                     class="css-1uqsgts"
@@ -67,7 +73,7 @@ const HomePage = () => {
               position: relative;
               overflow: hidden;
               background: #fff;
-              padding: 1.5em 1.5em 6.5em 1.5em;
+              padding: 1.5em 1.5em 6em 1.5em;
               box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
               transform: scale(0.8, 0.8) rotate(5deg);
             `}
@@ -75,34 +81,13 @@ const HomePage = () => {
             <img
               css={css`
                 object-fit: cover;
-                height: 600px;
-                width: 600px;
+                height: 26em;
+                width: 26em;
               `}
               src={engagementPhoto}
             />
           </div>
         </div>
-        <div
-          css={css`
-            width: 100%;
-            background: url("https://media-api.xogrp.com/images/2bf4f099-92a5-4864-8780-fbfea7e8030f")
-                bottom left no-repeat,
-              url("https://media-api.xogrp.com/images/bab0d90d-7c9b-41c9-9f4f-fa4be0c10e96")
-                bottom right no-repeat,
-              url("https://media-api.xogrp.com/images/2c46cfda-8f9d-4bfc-a5a7-bd8cf803e058")
-                bottom center no-repeat,
-              url("https://media-api.xogrp.com/images/30304a82-c097-4d61-8d43-25d9d4fbfd23")
-                bottom left no-repeat,
-              url("https://media-api.xogrp.com/images/4730a441-18b2-4e8c-b2c9-8f7a48986fe7")
-                bottom right no-repeat;
-            background-size: 30%, 30%, 100%, 50%, 70%;
-            min-height: 400px;
-            min-width: 420px;
-            display: flex;
-            flex: 1;
-            align-items: center;
-          `}
-        ></div>
       </MainLayout>
     </>
   );
