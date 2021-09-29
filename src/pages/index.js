@@ -59,7 +59,6 @@ const HomePage = () => {
                     `}
                     src="https://flourish.theknot.com/lockup/initials?firstName=Brie&amp;fianceFirstName=Clinton&amp;themeId=1226&amp;liteSite=true"
                     alt="Brie &amp; Clinton"
-                    class="css-1uqsgts"
                   />
                 </h1>
 
