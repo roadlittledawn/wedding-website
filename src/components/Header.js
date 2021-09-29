@@ -27,16 +27,20 @@ const Header = ({ className }) => {
           css={css`
             height: var(--global-header-height);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             max-width: var(--site-max-width);
             margin: 0 auto;
             padding: 0 var(--site-content-padding);
             align-items: center;
+            @media screen and (max-width: ${siteOptions.layout
+                .mobileBreakpoint}) {
+              align-items: flex-start;
+            }
           `}
         >
           <div
             css={css`
-              max-width: 33%;
+              margin-bottom: 2em;
             `}
           >
             <Link
@@ -67,6 +71,7 @@ const Header = ({ className }) => {
           <nav
             css={css`
               display: block;
+              color: var(--color-red-400);
               @media screen and (max-width: ${siteOptions.layout
                   .mobileBreakpoint}) {
                 display: none;
@@ -75,8 +80,6 @@ const Header = ({ className }) => {
           >
             <ul
               css={css`
-                margin: 0;
-                margin-left: 1rem;
                 padding: 0;
                 display: flex;
                 align-items: center;
