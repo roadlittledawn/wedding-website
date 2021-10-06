@@ -6,7 +6,7 @@ import { siteOptions } from "../utils/constants";
 const Logo = ({ color }) => (
   <div
     css={css`
-      font-family: "Julius Sans One", sans-serif;
+      /* font-family: "Julius Sans One", sans-serif; */
       font-size: 4em;
       font-weight: 200;
       color: var(--color-red-400);

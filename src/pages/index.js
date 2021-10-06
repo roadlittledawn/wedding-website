@@ -31,7 +31,6 @@ const HomePage = () => {
         >
           <div
             css={css`
-              font-family: "Julius Sans One", sans-serif;
               font-size: 2em;
             `}
           >
