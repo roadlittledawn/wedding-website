@@ -10,6 +10,9 @@ const VARIANTS = {
 const styles = {
   variant: {
     [VARIANTS.FAN]: css`
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       > * {
         position: relative;
         overflow: hidden;
@@ -49,8 +52,6 @@ const Polaroids = ({ images, featuredImg, variant }) => {
   return (
     <div
       css={css`
-        display: flex;
-        flex-wrap: wrap;
         ${styles.variant[variant]}
       `}
     >
