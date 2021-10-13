@@ -2,14 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { css } from "@emotion/react";
 import { siteOptions } from "../utils/constants";
+import logoSrc from "../images/BrieClintonLockup.png";
 
 const Logo = ({ color }) => (
   <div
     css={css`
-      /* font-family: "Julius Sans One", sans-serif; */
-      font-size: 4em;
-      font-weight: 200;
-      color: var(--color-red-400);
       display: flex;
       align-items: center;
 
@@ -22,17 +19,12 @@ const Logo = ({ color }) => (
       }
     `}
   >
-    <span>Brie </span>
-    <span
+    <img
+      src={logoSrc}
       css={css`
-        font-size: 1.5em;
-        color: var(--color-red-200);
-        opacity: 0.75;
+        width: 100%;
       `}
-    >
-      &amp;
-    </span>{" "}
-    <span>Clinton</span>
+    />
   </div>
 );
 
