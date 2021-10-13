@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { css } from "@emotion/react";
+import { siteOptions } from "../utils/constants";
 
 const VARIANTS = {
   FAN: "fan",
@@ -34,6 +35,11 @@ const styles = {
         object-fit: cover;
         height: 26em;
         width: 26em;
+      }
+      @media screen and (max-width: ${siteOptions.layout.mobileBreakpoint}) {
+        > :not(:nth-child(2)) {
+          display: none;
+        }
       }
     `,
   },
