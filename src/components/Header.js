@@ -40,6 +40,8 @@ const Header = ({ className }) => {
         >
           <div
             css={css`
+              width: 30%;
+              min-width: 400px;
               margin-bottom: 2em;
             `}
           >
@@ -81,6 +83,9 @@ const Header = ({ className }) => {
             <ul
               css={css`
                 padding: 0;
+                font-size: 1.5vw;
+                letter-spacing: 5px;
+                text-transform: uppercase;
                 display: flex;
                 align-items: center;
                 list-style-type: none;
