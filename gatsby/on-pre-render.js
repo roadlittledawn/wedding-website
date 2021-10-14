@@ -15,8 +15,8 @@ const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
       crossOrigin="true"
     />,
     <link
-      key="font-julius-sands"
-      href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap"
+      key="font-nunito"
+      href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
       rel="stylesheet"
     />,
   ]);
