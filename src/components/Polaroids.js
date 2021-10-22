@@ -43,6 +43,9 @@ const styles = {
         > :not(:nth-child(2)) {
           display: none;
         }
+        > * {
+          margin-right: 0;
+        }
       }
     `,
   },
