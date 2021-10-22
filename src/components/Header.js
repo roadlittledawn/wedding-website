@@ -41,7 +41,7 @@ const Header = ({ className }) => {
           <div
             css={css`
               width: 30%;
-              min-width: 400px;
+              min-width: 66vw;
               margin-bottom: 2em;
             `}
           >

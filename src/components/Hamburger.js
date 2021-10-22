@@ -29,7 +29,7 @@ const Hamburger = ({ open, onClick }) => {
           width: 2rem;
           height: 0.25rem;
           background: ${open
-            ? `var(--color-neutrals-600)`
+            ? `var(--color-neutrals-700)`
             : `var(--color-red-400)`};
           border-radius: 10px;
           transition: all 0.3s linear;

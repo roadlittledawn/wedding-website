@@ -13,7 +13,7 @@ const MobileNavMenu = ({ open }) => {
         display: ${open ? "flex" : "none"};
         flex-direction: column;
         justify-content: center;
-        background-color: var(--color-purple-300);
+        background-color: var(--color-red-400);
         height: 100vh;
         text-align: left;
         padding: 2rem;
@@ -31,7 +31,7 @@ const MobileNavMenu = ({ open }) => {
           padding: 2rem 0;
           font-weight: bold;
           letter-spacing: 0.5rem;
-          color: var(--color-dark-100);
+          color: var(--color-yellow-400);
           text-decoration: none;
           transition: color 0.3s linear;
 
