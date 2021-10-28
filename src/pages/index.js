@@ -2,7 +2,9 @@ import React from "react";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 import { css } from "@emotion/react";
-import engagementPhoto from "../images/engagement-b-w-meadow.jpg";
+import meadowPhoto from "../images/engagement-b-w-meadow.jpg";
+import trailStarePhoto from "../images/trail-stare.jpg";
+import trailWalkPhoto from "../images/trail-walk.jpg";
 import adventureBeginsSrc from "../images/OurAdventureBegins.png";
 import { siteOptions } from "../utils/constants";
 import Polaroids from "../components/Polaroids";
@@ -30,8 +32,8 @@ const HomePage = () => {
           <div>
             <Polaroids
               variant="fan"
-              images={[engagementPhoto, engagementPhoto, engagementPhoto]}
-              featuredImg={engagementPhoto}
+              images={[trailStarePhoto, meadowPhoto, trailWalkPhoto]}
+              featuredImg={meadowPhoto}
             />
           </div>
 
