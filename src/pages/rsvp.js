@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { navigate } from "@reach/router";
+import { css } from "@emotion/react";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 import LoadingIcon from "../components/LoadingIcon";
@@ -19,8 +20,17 @@ const query = gql`
         name
         isGoing
         mealChoice
+        likesOysters
         dietaryRestrictions
       }
+    }
+  }
+`;
+
+const recordResponseMutation = gql`
+  mutation RecordResponse($input: RecordResponseInput!) {
+    recordResponse(input: $input) {
+      isSubmitted
     }
   }
 `;
@@ -29,6 +39,7 @@ const RsvpPage = () => {
   const [state, setState] = useState({});
   const [inviteCode, setInviteCode] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(null);
   const [invite, setInviteData] = useState(null);
 
   const handleChange = (e) => {
@@ -45,21 +56,6 @@ const RsvpPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name"),
-        ...state,
-      }),
-    })
-      .then(() => navigate(form.getAttribute("action")))
-      .catch((error) => alert(error));
-  };
-
   const getInvite = async (id) => {
     setIsLoading(true);
     const variables = {
@@ -72,11 +68,41 @@ const RsvpPage = () => {
     setIsLoading(false);
   };
 
+  const recordResponseInDb = async () => {
+    const variables = {
+      input: {
+        inviteId: invite.inviteId,
+        payload: {
+          guestList: invite.guestList,
+        },
+      },
+    };
+    const data = await request(endpoint, recordResponseMutation, variables);
+    setIsSubmitted(data.recordResponse.isSubmitted);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    recordResponseInDb();
+    // const form = e.target;
+    // fetch("/", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    //   body: encode({
+    //     "form-name": form.getAttribute("name"),
+    //     ...state,
+    //   }),
+    // })
+    //   .then(() => navigate(form.getAttribute("action")))
+    //   .catch((error) => alert(error));
+  };
+
   return (
     <>
       <SEO title="RSVP" />
       <MainLayout>
         <h1>RSVP</h1>
+        {isSubmitted && <>Thanks for letting us know!</>}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -101,10 +127,12 @@ const RsvpPage = () => {
             <form
               name="rsvp-test1"
               method="POST"
-              action="/thanks/"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
+              css={css`
+                font-size: 1.5em;
+              `}
             >
               <input type="hidden" name="form-name" value="contact" />
               <p>Tell us who in your party is coming</p>
@@ -123,7 +151,6 @@ const RsvpPage = () => {
                       <div>
                         <p>What do you want to eat?</p>
                         <select
-                          value={invite.guestList[index].mealChoice || ""}
                           onChange={(e) =>
                             updateGuestData(index, "mealChoice", e)
                           }
@@ -133,9 +160,37 @@ const RsvpPage = () => {
                           <option value="Salmon">Salmon</option>
                         </select>
                       </div>
+
+                      <label htmlFor="">Do you like oysters?</label>
+                      <div>
+                        <input
+                          type="radio"
+                          id="yes-oysters"
+                          name="oysters"
+                          onChange={() =>
+                            updateGuestData(index, "likesOysters", {
+                              target: { type: "radio", value: true },
+                            })
+                          }
+                        />{" "}
+                        Yum!
+                        <input
+                          type="radio"
+                          id="no-oysters"
+                          name="oysters"
+                          onChange={() =>
+                            updateGuestData(index, "likesOysters", {
+                              target: { type: "radio", value: false },
+                            })
+                          }
+                        />{" "}
+                        Nah
+                      </div>
                       <div>
                         <p>Any dietary restrictions we should know about?</p>
                         <textarea
+                          placeholder="Allergies, vegan, other stuff"
+                          value={guest.dietaryRestrictions || ""}
                           onChange={(e) =>
                             updateGuestData(index, "dietaryRestrictions", e)
                           }
@@ -146,9 +201,9 @@ const RsvpPage = () => {
                 </div>
               ))}
 
-              {/* <p>
-                <button type="submit">Send</button>
-              </p> */}
+              <p>
+                <button type="submit">Submit</button>
+              </p>
             </form>
           </>
         )}
