@@ -41,8 +41,12 @@ const Header = ({ className }) => {
           <div
             css={css`
               width: 30%;
-              min-width: 66vw;
+              max-width: 500px;
               margin-bottom: 2em;
+              @media screen and (max-width: ${siteOptions.layout
+                  .mobileBreakpoint}) {
+                min-width: 66vw;
+              }
             `}
           >
             <Link
