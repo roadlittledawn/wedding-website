@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { navigate } from "@reach/router";
 import { css } from "@emotion/react";
 import MainLayout from "../layouts/MainLayout";
@@ -81,6 +81,11 @@ const RsvpPage = () => {
     setIsSubmitted(data.recordResponse.isSubmitted);
   };
 
+  useEffect(() => {
+    console.log({ isSubmitted: invite?.isSubmitted });
+    setIsSubmitted(invite?.isSubmitted);
+  }, [invite]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     recordResponseInDb();
@@ -102,109 +107,137 @@ const RsvpPage = () => {
       <SEO title="RSVP" />
       <MainLayout>
         <h1>RSVP</h1>
-        {isSubmitted && <>Thanks for letting us know!</>}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            getInvite(inviteCode);
-          }}
-        >
-          <label htmlFor="invite-code">Enter invite code</label>
-          <input
-            type="text"
-            id="invite-code"
-            name="invite-code"
-            placeholder="Enter code from your RSVP"
-            onChange={(e) => setInviteCode(e.target.value)}
-          />
-          <button type="submit">Get invite</button>
-        </form>
-        {isLoading && <LoadingIcon />}
-        {invite && (
+        {isSubmitted ? (
+          <>👍 Thanks for letting us know!</>
+        ) : (
           <>
-            <pre>{JSON.stringify(invite, null, 2)}</pre>
-            <h3>{invite.partyName}</h3>
             <form
-              name="rsvp-test1"
-              method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-              onSubmit={handleSubmit}
-              css={css`
-                font-size: 1.5em;
-              `}
+              onSubmit={(e) => {
+                e.preventDefault();
+                getInvite(inviteCode);
+              }}
             >
-              <input type="hidden" name="form-name" value="contact" />
-              <p>Tell us who in your party is coming</p>
-
-              {invite.guestList.map((guest, index) => (
-                <div>
-                  <input
-                    type="checkbox"
-                    id={slugify(guest.name)}
-                    name={slugify(guest.name)}
-                    onChange={(e) => updateGuestData(index, "isGoing", e)}
-                  />
-                  <label htmlFor={slugify(guest.name)}>{guest.name}</label>
-                  {invite.guestList[index].isGoing && (
-                    <div>
-                      <div>
-                        <p>What do you want to eat?</p>
-                        <select
-                          onChange={(e) =>
-                            updateGuestData(index, "mealChoice", e)
-                          }
-                        >
-                          <option value="Chicken">Chicken</option>
-                          <option value="Pasta">Pasta</option>
-                          <option value="Salmon">Salmon</option>
-                        </select>
-                      </div>
-
-                      <label htmlFor="">Do you like oysters?</label>
-                      <div>
-                        <input
-                          type="radio"
-                          id="yes-oysters"
-                          name="oysters"
-                          onChange={() =>
-                            updateGuestData(index, "likesOysters", {
-                              target: { type: "radio", value: true },
-                            })
-                          }
-                        />{" "}
-                        Yum!
-                        <input
-                          type="radio"
-                          id="no-oysters"
-                          name="oysters"
-                          onChange={() =>
-                            updateGuestData(index, "likesOysters", {
-                              target: { type: "radio", value: false },
-                            })
-                          }
-                        />{" "}
-                        Nah
-                      </div>
-                      <div>
-                        <p>Any dietary restrictions we should know about?</p>
-                        <textarea
-                          placeholder="Allergies, vegan, other stuff"
-                          value={guest.dietaryRestrictions || ""}
-                          onChange={(e) =>
-                            updateGuestData(index, "dietaryRestrictions", e)
-                          }
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-
-              <p>
-                <button type="submit">Submit</button>
-              </p>
+              <label htmlFor="invite-code">Enter invite code</label>
+              <input
+                type="text"
+                id="invite-code"
+                name="invite-code"
+                placeholder="Enter code from your RSVP"
+                onChange={(e) => setInviteCode(e.target.value)}
+              />
+              <button type="submit">Get invite</button>
             </form>
+            {isLoading && (
+              <div
+                css={css`
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  color: var(--color-red-400);
+                `}
+              >
+                <LoadingIcon />
+                <p>Hang tight. This could take up to 5 seconds</p>
+              </div>
+            )}
+            {invite && (
+              <>
+                <pre>{JSON.stringify(invite, null, 2)}</pre>
+                <h2>{invite.partyName}</h2>
+                <form
+                  name="rsvp-test1"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  css={css`
+                    font-size: 1.25em;
+                  `}
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p>Who in your party is coming?</p>
+
+                  {invite.guestList.map((guest, index) => (
+                    <div>
+                      <input
+                        type="checkbox"
+                        id={slugify(guest.name)}
+                        name={slugify(guest.name)}
+                        onChange={(e) => updateGuestData(index, "isGoing", e)}
+                      />
+                      <label htmlFor={slugify(guest.name)}>{guest.name}</label>
+                      {invite.guestList[index].isGoing && (
+                        <div>
+                          <div>
+                            <p>What do you want to eat?</p>
+                            <select
+                              onChange={(e) =>
+                                updateGuestData(index, "mealChoice", e)
+                              }
+                            >
+                              <option key={"meal-none"} value="">
+                                - Choose meal -
+                              </option>
+                              <option key={"meal-chicken"} value="Chicken">
+                                Chicken
+                              </option>
+                              <option key={"meal-pasta"} value="Pasta">
+                                Pasta
+                              </option>
+                              <option key={"meal-salmon"} value="Salmon">
+                                Salmon
+                              </option>
+                            </select>
+                          </div>
+
+                          <label htmlFor="">Do you like oysters?</label>
+                          <div>
+                            <input
+                              type="radio"
+                              id="yes-oysters"
+                              name="oysters"
+                              onChange={() =>
+                                updateGuestData(index, "likesOysters", {
+                                  target: { type: "radio", value: true },
+                                })
+                              }
+                            />{" "}
+                            Yum!
+                            <input
+                              type="radio"
+                              id="no-oysters"
+                              name="oysters"
+                              onChange={() =>
+                                updateGuestData(index, "likesOysters", {
+                                  target: { type: "radio", value: false },
+                                })
+                              }
+                            />{" "}
+                            Nah
+                          </div>
+                          <div>
+                            <p>
+                              Any dietary restrictions we should know about?
+                            </p>
+                            <textarea
+                              placeholder="Allergies, vegan, other stuff"
+                              value={guest.dietaryRestrictions || ""}
+                              onChange={(e) =>
+                                updateGuestData(index, "dietaryRestrictions", e)
+                              }
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+
+                  <p>
+                    <button type="submit">Submit</button>
+                  </p>
+                </form>
+              </>
+            )}
           </>
         )}
       </MainLayout>
