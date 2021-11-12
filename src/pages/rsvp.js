@@ -137,7 +137,7 @@ const RsvpPage = () => {
                 `}
               >
                 <LoadingIcon />
-                <p>Hang tight. This could take up to 5 seconds</p>
+                <p>Hang tight. We're getting your RSVP info...</p>
               </div>
             )}
             {invite && (
