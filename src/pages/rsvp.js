@@ -53,7 +53,7 @@ const RsvpPage = () => {
     setInviteData((state) => ({
       ...state,
       guestList: state.guestList.map((el, index) =>
-        index === guestIdx ? { ...el, isGoing: value } : el
+        index === guestIdx ? { ...el, [propName]: value } : el
       ),
     }));
   };
