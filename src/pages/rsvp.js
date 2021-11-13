@@ -49,11 +49,13 @@ const RsvpPage = () => {
   const updateGuestData = (guestIdx, propName, e) => {
     const { target } = e;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    setInviteData((state) => {
-      const obj = state;
-      obj.guestList[guestIdx][propName] = value;
-      setInviteData(obj);
-    });
+
+    setInviteData((state) => ({
+      ...state,
+      guestList: state.guestList.map((el, index) =>
+        index === guestIdx ? { ...el, isGoing: value } : el
+      ),
+    }));
   };
 
   const getInvite = async (id) => {
@@ -82,7 +84,6 @@ const RsvpPage = () => {
   };
 
   useEffect(() => {
-    console.log({ isSubmitted: invite?.isSubmitted });
     setIsSubmitted(invite?.isSubmitted);
   }, [invite]);
 
@@ -160,13 +161,14 @@ const RsvpPage = () => {
                   {invite.guestList.map((guest, index) => (
                     <div>
                       <input
+                        key={`${slugify(guest.name)}-isgoing`}
                         type="checkbox"
-                        id={slugify(guest.name)}
-                        name={slugify(guest.name)}
+                        id={`${slugify(guest.name)}-isgoing`}
+                        name={`${slugify(guest.name)}-isgoing`}
                         onChange={(e) => updateGuestData(index, "isGoing", e)}
                       />
                       <label htmlFor={slugify(guest.name)}>{guest.name}</label>
-                      {invite.guestList[index].isGoing && (
+                      {invite?.guestList[index].isGoing && (
                         <div>
                           <div>
                             <p>What do you want to eat?</p>
@@ -175,16 +177,28 @@ const RsvpPage = () => {
                                 updateGuestData(index, "mealChoice", e)
                               }
                             >
-                              <option key={"meal-none"} value="">
+                              <option
+                                key={`${slugify(guest.name)}-meal-none`}
+                                value=""
+                              >
                                 - Choose meal -
                               </option>
-                              <option key={"meal-chicken"} value="Chicken">
+                              <option
+                                key={`${slugify(guest.name)}-meal-chicken`}
+                                value="Chicken"
+                              >
                                 Chicken
                               </option>
-                              <option key={"meal-pasta"} value="Pasta">
+                              <option
+                                key={`${slugify(guest.name)}-meal-pasta`}
+                                value="Pasta"
+                              >
                                 Pasta
                               </option>
-                              <option key={"meal-salmon"} value="Salmon">
+                              <option
+                                key={`${slugify(guest.name)}-meal-salmon`}
+                                value="Salmon"
+                              >
                                 Salmon
                               </option>
                             </select>
