@@ -11,7 +11,11 @@ import Select from "../components/Select";
 
 const endpoint = "https://b-c-rsvp-service.herokuapp.com/graphql";
 
-const mealOptions = ["Chicken", "Pasta", "Salmon"];
+const mealOptions = [
+  { label: "Chicken", value: "Chicken" },
+  { label: "Pasta", value: "Pasta" },
+  { label: "Salmon", value: "Salmon" },
+];
 
 const query = gql`
   query GetInvite($input: InviteInput!) {
@@ -207,7 +211,10 @@ const RsvpPage = () => {
                               options={mealOptions}
                               emptyOptionText={"- Choose meal -"}
                               validate={(value) =>
-                                !mealOptions.includes(value)
+                                value === "" ||
+                                !Boolean(
+                                  mealOptions.find((opt) => opt.value === value)
+                                )
                                   ? "Please choose one of the meal choices"
                                   : false
                               }
@@ -218,7 +225,10 @@ const RsvpPage = () => {
                           <div>
                             <Select
                               field={`guestList.${index}.likesOysters`}
-                              options={["Yes", "No"]}
+                              options={[
+                                { label: "Yes", value: 1 },
+                                { label: "No", value: 0 },
+                              ]}
                               emptyOptionText={"- Select an option -"}
                               validate={(value) =>
                                 !value

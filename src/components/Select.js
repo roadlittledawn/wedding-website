@@ -26,8 +26,8 @@ const Select = (props) => {
           {emptyOptionText}
         </option>
         {options.map((option) => (
-          <option key={`${field}-${option}`} value={option}>
-            {option}
+          <option key={`${field}-${option.label}`} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>{" "}
