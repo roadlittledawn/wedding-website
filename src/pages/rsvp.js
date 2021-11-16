@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { navigate } from "@reach/router";
+// import { navigate } from "@reach/router";
 import { css } from "@emotion/react";
+import { request, gql } from "graphql-request";
+import slugify from "react-slugify";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 import LoadingIcon from "../components/LoadingIcon";
-import { request, gql } from "graphql-request";
-import slugify from "react-slugify";
+import { useForm } from "react-form";
+import Select from "../components/Select";
 
 const endpoint = "https://b-c-rsvp-service.herokuapp.com/graphql";
+
+const mealOptions = ["Chicken", "Pasta", "Salmon"];
 
 const query = gql`
   query GetInvite($input: InviteInput!) {
@@ -41,6 +45,23 @@ const RsvpPage = () => {
   const [isLoading, setIsLoading] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [invite, setInviteData] = useState(null);
+
+  const {
+    Form,
+    meta: { canSubmit },
+  } = useForm({
+    debugForm: true,
+    onSubmit: (values) => {
+      console.log("Huzzah!", values);
+      setInviteData((prevState) => ({
+        ...prevState,
+        guestList: prevState.guestList.map((originalGuestData, index) => ({
+          ...originalGuestData,
+          ...values.guestList[index],
+        })),
+      }));
+    },
+  });
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -87,9 +108,11 @@ const RsvpPage = () => {
     setIsSubmitted(invite?.isSubmitted);
   }, [invite]);
 
-  const handleSubmit = (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
-    recordResponseInDb();
+
+    // recordResponseInDb();
+
     // const form = e.target;
     // fetch("/", {
     //   method: "POST",
@@ -143,18 +166,23 @@ const RsvpPage = () => {
             )}
             {invite && (
               <>
+                <h1>
+                  State: <pre>invite</pre>
+                </h1>
                 <pre>{JSON.stringify(invite, null, 2)}</pre>
+
                 <h2>{invite.partyName}</h2>
-                <form
+                {/* <form
                   name="rsvp-test1"
                   method="POST"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
-                  onSubmit={handleSubmit}
+                  onSubmit={submitForm}
                   css={css`
                     font-size: 1.25em;
                   `}
-                >
+                > */}
+                <Form>
                   <input type="hidden" name="form-name" value="contact" />
                   <p>Who in your party is coming?</p>
 
@@ -172,62 +200,28 @@ const RsvpPage = () => {
                         <div>
                           <div>
                             <p>What do you want to eat?</p>
-                            <select
-                              onChange={(e) =>
-                                updateGuestData(index, "mealChoice", e)
+                            <Select
+                              field={`guestList.${index}.mealChoice`}
+                              options={mealOptions}
+                              validate={(value) =>
+                                !mealOptions.includes(value)
+                                  ? "Please choose one of the meal choices"
+                                  : false
                               }
-                            >
-                              <option
-                                key={`${slugify(guest.name)}-meal-none`}
-                                value=""
-                              >
-                                - Choose meal -
-                              </option>
-                              <option
-                                key={`${slugify(guest.name)}-meal-chicken`}
-                                value="Chicken"
-                              >
-                                Chicken
-                              </option>
-                              <option
-                                key={`${slugify(guest.name)}-meal-pasta`}
-                                value="Pasta"
-                              >
-                                Pasta
-                              </option>
-                              <option
-                                key={`${slugify(guest.name)}-meal-salmon`}
-                                value="Salmon"
-                              >
-                                Salmon
-                              </option>
-                            </select>
+                            />
                           </div>
 
                           <label htmlFor="">Do you like oysters?</label>
                           <div>
-                            <input
-                              type="radio"
-                              id="yes-oysters"
-                              name="oysters"
-                              onChange={() =>
-                                updateGuestData(index, "likesOysters", {
-                                  target: { type: "radio", value: true },
-                                })
+                            <Select
+                              field={`guestList.${index}.likesOysters`}
+                              options={["Yes", "No"]}
+                              validate={(value) =>
+                                !value
+                                  ? "Let us know if you like oysters"
+                                  : false
                               }
-                            />{" "}
-                            Yum!
-                            <input
-                              type="radio"
-                              id="no-oysters"
-                              name="oysters"
-                              onChange={() =>
-                                updateGuestData(index, "likesOysters", {
-                                  target: { type: "radio", value: false },
-                                })
-                              }
-                            />{" "}
-                            Nah
+                            />
                           </div>
                           <div>
                             <p>
@@ -247,9 +241,12 @@ const RsvpPage = () => {
                   ))}
 
                   <p>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={!canSubmit}>
+                      Submit
+                    </button>
                   </p>
-                </form>
+                </Form>
+                {/* </form> */}
               </>
             )}
           </>
