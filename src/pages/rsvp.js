@@ -53,13 +53,15 @@ const RsvpPage = () => {
     debugForm: true,
     onSubmit: (values) => {
       console.log("Huzzah!", values);
-      setInviteData((prevState) => ({
-        ...prevState,
-        guestList: prevState.guestList.map((originalGuestData, index) => ({
-          ...originalGuestData,
-          ...values.guestList[index],
-        })),
-      }));
+      if (Object.keys(values).length !== 0 && values.guestList) {
+        setInviteData((prevState) => ({
+          ...prevState,
+          guestList: prevState.guestList.map((originalGuestData, index) => ({
+            ...originalGuestData,
+            ...values.guestList[index],
+          })),
+        }));
+      }
     },
   });
 
