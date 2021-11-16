@@ -203,6 +203,7 @@ const RsvpPage = () => {
                             <Select
                               field={`guestList.${index}.mealChoice`}
                               options={mealOptions}
+                              emptyOptionText={"- Choose meal -"}
                               validate={(value) =>
                                 !mealOptions.includes(value)
                                   ? "Please choose one of the meal choices"
@@ -216,6 +217,7 @@ const RsvpPage = () => {
                             <Select
                               field={`guestList.${index}.likesOysters`}
                               options={["Yes", "No"]}
+                              emptyOptionText={"- Select an option -"}
                               validate={(value) =>
                                 !value
                                   ? "Let us know if you like oysters"
