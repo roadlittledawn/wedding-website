@@ -48,6 +48,7 @@ const RsvpPage = () => {
   // const [state, setState] = useState({});
   const [inviteCode, setInviteCode] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [inviteFound, setInviteFound] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [invite, setInviteData] = useState(null);
 
@@ -98,6 +99,11 @@ const RsvpPage = () => {
       },
     };
     const data = await request(endpoint, query, variables);
+    if (!data.invite) {
+      setInviteFound(false);
+    } else if (data.invite) {
+      setInviteFound(true);
+    }
     setInviteData(data.invite);
     setIsLoading(false);
   };
@@ -128,22 +134,59 @@ const RsvpPage = () => {
           <>Your RSVP has been recorded. Thanks for letting us know! 👍</>
         ) : (
           <>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                getInvite(inviteCode);
-              }}
-            >
-              <label htmlFor="invite-code">Enter invite code</label>
-              <input
-                type="text"
-                id="invite-code"
-                name="invite-code"
-                placeholder="Enter code from your RSVP"
-                onChange={(e) => setInviteCode(e.target.value)}
-              />
-              <button type="submit">Get invite</button>
-            </form>
+            {!invite && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  getInvite(inviteCode);
+                }}
+                css={css`
+                  > * {
+                    margin: 1em 0;
+                  }
+                `}
+              >
+                <div>
+                  <label htmlFor="invite-code">
+                    Enter the personalized code found in your invite
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    id="invite-code"
+                    name="invite-code"
+                    placeholder="Invite code"
+                    onChange={(e) => setInviteCode(e.target.value)}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  css={css`
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0.5rem 1rem;
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    background-color: var(--color-red-400);
+                    color: var(--color-white);
+                    border-radius: 3px;
+                    line-height: 1;
+                    cursor: pointer;
+                    border: 1px solid transparent;
+                    transition: all 0.15s ease-out;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    :hover {
+                      opacity: 0.75;
+                    }
+                  `}
+                >
+                  Get invite
+                </button>
+              </form>
+            )}
             {isLoading && (
               <div
                 css={css`
@@ -156,6 +199,15 @@ const RsvpPage = () => {
                 <LoadingIcon />
                 <p>Hang tight. We're getting your RSVP info...</p>
               </div>
+            )}
+            {inviteFound === false && (
+              <>
+                <p>
+                  🤔 We could not find an invite with that code. Make sure you
+                  entered the correct code. If it's correct, feel free to rage
+                  text Clinton ;)
+                </p>
+              </>
             )}
             {invite && (
               <>
