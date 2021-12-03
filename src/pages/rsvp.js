@@ -130,7 +130,7 @@ const RsvpPage = () => {
       <MainLayout>
         <h1>RSVP</h1>
         {isSubmitted ? (
-          <>👍 Thanks for letting us know!</>
+          <>Your RSVP has been recorded. Thanks for letting us know! 👍</>
         ) : (
           <>
             <form
