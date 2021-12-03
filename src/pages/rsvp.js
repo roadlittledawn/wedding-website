@@ -44,7 +44,8 @@ const recordResponseMutation = gql`
 `;
 
 const RsvpPage = () => {
-  const [state, setState] = useState({});
+  // TODO: Netlify: form state
+  // const [state, setState] = useState({});
   const [inviteCode, setInviteCode] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(null);
@@ -55,7 +56,6 @@ const RsvpPage = () => {
     values,
     meta: { canSubmit },
   } = useForm({
-    debugForm: true,
     onSubmit: () => {
       recordResponseInDb();
       // TODO: Netlify: record submission in netfliy
@@ -159,11 +159,6 @@ const RsvpPage = () => {
             )}
             {invite && (
               <>
-                <h1>
-                  State: <pre>invite</pre>
-                </h1>
-                <pre>{JSON.stringify(invite, null, 2)}</pre>
-
                 <h2>{invite.partyName}</h2>
                 {/* <form
                   name="rsvp-test1"
