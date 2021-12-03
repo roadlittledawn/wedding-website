@@ -16,6 +16,7 @@ const Select = (props) => {
   } = useField(field, fieldOptions);
 
   const handleSelectChange = (e) => {
+    props.onInputChange(props.guestIdx, e.target.value);
     setValue(e.target.value);
   };
 

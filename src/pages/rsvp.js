@@ -52,20 +52,12 @@ const RsvpPage = () => {
 
   const {
     Form,
+    values,
     meta: { canSubmit },
   } = useForm({
     debugForm: true,
     onSubmit: (values) => {
-      console.log("Huzzah!", values);
-      if (Object.keys(values).length !== 0 && values.guestList) {
-        setInviteData((prevState) => ({
-          ...prevState,
-          guestList: prevState.guestList.map((originalGuestData, index) => ({
-            ...originalGuestData,
-            ...values.guestList[index],
-          })),
-        }));
-      }
+      recordResponseInDb();
     },
   });
 
@@ -208,8 +200,20 @@ const RsvpPage = () => {
                             <p>What do you want to eat?</p>
                             <Select
                               field={`guestList.${index}.mealChoice`}
+                              guestIdx={index}
                               options={mealOptions}
                               emptyOptionText={"- Choose meal -"}
+                              onInputChange={(guestIdx, value) =>
+                                setInviteData((prevState) => ({
+                                  ...prevState,
+                                  guestList: prevState.guestList.map(
+                                    (el, index) =>
+                                      index === guestIdx
+                                        ? { ...el, mealChoice: value }
+                                        : el
+                                  ),
+                                }))
+                              }
                               validate={(value) =>
                                 value === "" ||
                                 !Boolean(
@@ -230,6 +234,23 @@ const RsvpPage = () => {
                                 { label: "No", value: 0 },
                               ]}
                               emptyOptionText={"- Select an option -"}
+                              guestIdx={index}
+                              onInputChange={(guestIdx, value) =>
+                                setInviteData((prevState) => ({
+                                  ...prevState,
+                                  guestList: prevState.guestList.map(
+                                    (el, index) =>
+                                      index === guestIdx
+                                        ? {
+                                            ...el,
+                                            likesOysters: Boolean(
+                                              parseInt(value)
+                                            ),
+                                          }
+                                        : el
+                                  ),
+                                }))
+                              }
                               validate={(value) =>
                                 !value
                                   ? "Let us know if you like oysters"
