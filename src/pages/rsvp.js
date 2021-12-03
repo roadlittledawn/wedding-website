@@ -56,14 +56,27 @@ const RsvpPage = () => {
     meta: { canSubmit },
   } = useForm({
     debugForm: true,
-    onSubmit: (values) => {
+    onSubmit: () => {
       recordResponseInDb();
+      // TODO: Netlify: record submission in netfliy
+      // const form = e.target;
+      // fetch("/", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      //   body: encode({
+      //     "form-name": form.getAttribute("name"),
+      //     ...state,
+      //   }),
+      // })
+      //   .then(() => navigate(form.getAttribute("action")))
+      //   .catch((error) => alert(error));
     },
   });
 
-  const handleChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
-  };
+  // TODO: Netlify: form state
+  // const handleChange = (e) => {
+  //   setState({ ...state, [e.target.name]: e.target.value });
+  // };
 
   const updateGuestData = (guestIdx, propName, e) => {
     const { target } = e;
@@ -105,24 +118,6 @@ const RsvpPage = () => {
   useEffect(() => {
     setIsSubmitted(invite?.isSubmitted);
   }, [invite]);
-
-  const submitForm = (e) => {
-    e.preventDefault();
-
-    // recordResponseInDb();
-
-    // const form = e.target;
-    // fetch("/", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //   body: encode({
-    //     "form-name": form.getAttribute("name"),
-    //     ...state,
-    //   }),
-    // })
-    //   .then(() => navigate(form.getAttribute("action")))
-    //   .catch((error) => alert(error));
-  };
 
   return (
     <>
@@ -291,10 +286,11 @@ const RsvpPage = () => {
   );
 };
 
-const encode = (data) => {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-};
+// TODO: Netfify: helper function
+// const encode = (data) => {
+//   return Object.keys(data)
+//     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+//     .join("&");
+// };
 
 export default RsvpPage;
