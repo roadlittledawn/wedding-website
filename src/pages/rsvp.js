@@ -8,6 +8,7 @@ import SEO from "../components/SEO";
 import LoadingIcon from "../components/LoadingIcon";
 import { useForm } from "react-form";
 import Select from "../components/Select";
+import check from "../images/check.svg";
 
 const endpoint = "https://b-c-rsvp-service.herokuapp.com/graphql";
 
@@ -48,6 +49,7 @@ const RsvpPage = () => {
   // const [state, setState] = useState({});
   const [inviteCode, setInviteCode] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [inviteFound, setInviteFound] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [invite, setInviteData] = useState(null);
 
@@ -98,6 +100,11 @@ const RsvpPage = () => {
       },
     };
     const data = await request(endpoint, query, variables);
+    if (!data.invite) {
+      setInviteFound(false);
+    } else if (data.invite) {
+      setInviteFound(true);
+    }
     setInviteData(data.invite);
     setIsLoading(false);
   };
@@ -128,22 +135,59 @@ const RsvpPage = () => {
           <>Your RSVP has been recorded. Thanks for letting us know! 👍</>
         ) : (
           <>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                getInvite(inviteCode);
-              }}
-            >
-              <label htmlFor="invite-code">Enter invite code</label>
-              <input
-                type="text"
-                id="invite-code"
-                name="invite-code"
-                placeholder="Enter code from your RSVP"
-                onChange={(e) => setInviteCode(e.target.value)}
-              />
-              <button type="submit">Get invite</button>
-            </form>
+            {!invite && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  getInvite(inviteCode);
+                }}
+                css={css`
+                  > * {
+                    margin: 1em 0;
+                  }
+                `}
+              >
+                <div>
+                  <label htmlFor="invite-code">
+                    Enter the personalized code found in your invite
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    id="invite-code"
+                    name="invite-code"
+                    placeholder="Invite code"
+                    onChange={(e) => setInviteCode(e.target.value)}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  css={css`
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0.5rem 1rem;
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    background-color: var(--color-red-400);
+                    color: var(--color-white);
+                    border-radius: 3px;
+                    line-height: 1;
+                    cursor: pointer;
+                    border: 1px solid transparent;
+                    transition: all 0.15s ease-out;
+                    white-space: nowrap;
+                    text-decoration: none;
+                    :hover {
+                      opacity: 0.75;
+                    }
+                  `}
+                >
+                  Get invite
+                </button>
+              </form>
+            )}
             {isLoading && (
               <div
                 css={css`
@@ -156,6 +200,15 @@ const RsvpPage = () => {
                 <LoadingIcon />
                 <p>Hang tight. We're getting your RSVP info...</p>
               </div>
+            )}
+            {inviteFound === false && (
+              <>
+                <p>
+                  🤔 We could not find an invite with that code. Make sure you
+                  entered the correct code. If it's correct, feel free to rage
+                  text Clinton ;)
+                </p>
+              </>
             )}
             {invite && (
               <>
@@ -175,15 +228,78 @@ const RsvpPage = () => {
                   <p>Who in your party is coming?</p>
 
                   {invite.guestList.map((guest, index) => (
-                    <div>
-                      <input
-                        key={`${slugify(guest.name)}-isgoing`}
-                        type="checkbox"
-                        id={`${slugify(guest.name)}-isgoing`}
-                        name={`${slugify(guest.name)}-isgoing`}
-                        onChange={(e) => updateGuestData(index, "isGoing", e)}
-                      />
-                      <label htmlFor={slugify(guest.name)}>{guest.name}</label>
+                    <div
+                      css={css`
+                        margin: 1em 0;
+                      `}
+                    >
+                      <div
+                        css={css`
+                          display: flex;
+                          width: 100%;
+                          max-width: 400px;
+                          align-items: center;
+                          justify-content: flex-start;
+                          padding: 1em 0;
+                          border: 1px solid var(--color-red-400);
+                          border-radius: 6px;
+                          :hover {
+                            cursor: pointer;
+                            background-color: var(--color-red-200);
+                            opacity: 0.75;
+                          }
+                          ${invite.guestList[index].isGoing &&
+                          `background-color: var(--color-red-200);`}
+                          > * {
+                            margin: 0 1em;
+                            pointer-events: none;
+                          }
+                        `}
+                        onClick={() => {
+                          setInviteData((state) => ({
+                            ...state,
+                            guestList: state.guestList.map((el, idx) => {
+                              const value = !invite.guestList[index].isGoing;
+                              return idx === index
+                                ? { ...el, isGoing: value }
+                                : el;
+                            }),
+                          }));
+                        }}
+                      >
+                        <input
+                          css={css`
+                            appearance: none;
+                            border: solid 1px var(--color-red-400);
+                            height: 2em;
+                            width: 2em;
+                            border-radius: 3px;
+                            :hover {
+                              cursor: pointer;
+                            }
+                            :checked {
+                              background-color: var(--color-red-400);
+                              border: solid 1px var(--color-red-200);
+                              background-image: url(${check});
+                              background-position: 50%;
+                              background-repeat: no-repeat;
+                            }
+                            :disabled {
+                              border: solid 1px gray;
+                              cursor: auto;
+                            }
+                          `}
+                          key={`${slugify(guest.name)}-isgoing`}
+                          type="checkbox"
+                          id={`${slugify(guest.name)}-isgoing`}
+                          name={`${slugify(guest.name)}-isgoing`}
+                          checked={invite.guestList[index].isGoing}
+                          // onChange={(e) => updateGuestData(index, "isGoing", e)}
+                        />
+                        <label htmlFor={`${slugify(guest.name)}-isgoing`}>
+                          {guest.name}
+                        </label>
+                      </div>
                       {invite?.guestList[index].isGoing && (
                         <div>
                           <div>
