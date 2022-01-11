@@ -12,10 +12,9 @@ import check from "../images/check.svg";
 
 const endpoint = "https://b-c-rsvp-service.herokuapp.com/graphql";
 
-const mealOptions = [
-  { label: "Chicken", value: "Chicken" },
-  { label: "Pasta", value: "Pasta" },
-  { label: "Salmon", value: "Salmon" },
+const dietaryPrefOptions = [
+  { label: "Vegan", value: "Vegan" },
+  { label: "Vegetarian", value: "Vegetarian" },
 ];
 
 const query = gql`
@@ -25,10 +24,11 @@ const query = gql`
       inviteId
       isSubmitted
       partyName
+      personalMessage
       guestList {
         name
         isGoing
-        mealChoice
+        dietaryPreference
         likesOysters
         dietaryRestrictions
       }
@@ -212,6 +212,13 @@ const RsvpPage = () => {
             )}
             {invite && (
               <>
+                <p>
+                  The meal is <b>family style</b>, which means you'll have your
+                  pick from various dishes at your table. We just need to know
+                  if anyone in your party is vegetarian / vegan, or if they have
+                  any other dietary restrictions / food allergies to ensure each
+                  table has what they need.
+                </p>
                 <h2>{invite.partyName}</h2>
                 {/* <form
                   name="rsvp-test1"
@@ -223,8 +230,39 @@ const RsvpPage = () => {
                     font-size: 1.25em;
                   `}
                 > */}
+
+                {invite.personalMessage && (
+                  <div
+                    css={css`
+                      border: 1px solid #b39a83;
+                      border-radius: 6px;
+                      margin: 1em;
+                    `}
+                  >
+                    <div
+                      css={css`
+                        background-color: #b39a83;
+                        padding: 0.5em;
+                        font-size: 0.8em;
+                        font-weight: bold;
+                      `}
+                    >
+                      A NOTE FROM THE HOSTS
+                    </div>
+                    <div
+                      css={css`
+                        padding: 1em;
+                      `}
+                      dangerouslySetInnerHTML={{
+                        __html: invite.personalMessage,
+                      }}
+                    ></div>
+                  </div>
+                )}
+
                 <Form>
                   <input type="hidden" name="form-name" value="contact" />
+
                   <p>Who in your party is coming?</p>
 
                   {invite.guestList.map((guest, index) => (
@@ -243,13 +281,13 @@ const RsvpPage = () => {
                           padding: 1em 0;
                           border: 1px solid var(--color-red-400);
                           border-radius: 6px;
-                          :hover {
-                            cursor: pointer;
-                            background-color: var(--color-red-200);
-                            opacity: 0.75;
-                          }
                           ${invite.guestList[index].isGoing &&
                           `background-color: var(--color-red-200);`}
+                          :hover {
+                            cursor: pointer;
+                          }
+                          ${!invite.guestList[index].isGoing &&
+                          selectHoverStyles}
                           > * {
                             margin: 0 1em;
                             pointer-events: none;
@@ -301,37 +339,60 @@ const RsvpPage = () => {
                         </label>
                       </div>
                       {invite?.guestList[index].isGoing && (
-                        <div>
+                        <div
+                          css={css`
+                            > * {
+                              margin: 1em 0;
+                            }
+                          `}
+                        >
                           <div>
-                            <p>What do you want to eat?</p>
+                            <p>
+                              Would {guest.name} like vegetarian or vegan
+                              options at the table?
+                            </p>
                             <Select
-                              field={`guestList.${index}.mealChoice`}
+                              field={`guestList.${index}.dietaryPreference`}
                               guestIdx={index}
-                              options={mealOptions}
-                              emptyOptionText={"- Choose meal -"}
+                              options={dietaryPrefOptions}
+                              value={invite?.guestList[index].dietaryPreference}
+                              emptyOptionText={"- No preference -"}
+                              disableEmptyOption={false}
                               onInputChange={(guestIdx, value) =>
                                 setInviteData((prevState) => ({
                                   ...prevState,
                                   guestList: prevState.guestList.map(
                                     (el, index) =>
                                       index === guestIdx
-                                        ? { ...el, mealChoice: value }
+                                        ? { ...el, dietaryPreference: value }
                                         : el
                                   ),
                                 }))
                               }
-                              validate={(value) =>
-                                value === "" ||
-                                !Boolean(
-                                  mealOptions.find((opt) => opt.value === value)
-                                )
-                                  ? "Please choose one of the meal choices"
-                                  : false
-                              }
                             />
                           </div>
 
-                          <label htmlFor="">Do you like oysters?</label>
+                          <label htmlFor={`guestList.${index}.likesOysters`}>
+                            <span
+                              css={css`
+                                color: red;
+                                margin-right: 0.5em;
+                              `}
+                            >
+                              *
+                            </span>
+                            Do you like oysters?{" "}
+                            <span
+                              css={css`
+                                color: red;
+                                margin-left: 0.5em;
+                                font-style: italic;
+                              `}
+                            >
+                              Required
+                            </span>
+                          </label>
+
                           <div>
                             <Select
                               field={`guestList.${index}.likesOysters`}
@@ -359,7 +420,7 @@ const RsvpPage = () => {
                               }
                               validate={(value) =>
                                 !value
-                                  ? "Let us know if you like oysters"
+                                  ? "Let us know if this guest likes oysters"
                                   : false
                               }
                             />
@@ -369,11 +430,14 @@ const RsvpPage = () => {
                               Any dietary restrictions we should know about?
                             </p>
                             <textarea
-                              placeholder="Allergies, vegan, other stuff"
+                              placeholder="Food allergies, sensitivites, etc"
                               value={guest.dietaryRestrictions || ""}
                               onChange={(e) =>
                                 updateGuestData(index, "dietaryRestrictions", e)
                               }
+                              css={css`
+                                width: 350px;
+                              `}
                             />
                           </div>
                         </div>
@@ -382,7 +446,30 @@ const RsvpPage = () => {
                   ))}
 
                   <p>
-                    <button type="submit" disabled={!canSubmit}>
+                    <button
+                      css={css`
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0.5rem 1rem;
+                        font-size: 0.875rem;
+                        font-weight: 600;
+                        background-color: var(--color-red-400);
+                        color: var(--color-white);
+                        border-radius: 3px;
+                        line-height: 1;
+                        cursor: pointer;
+                        border: 1px solid transparent;
+                        transition: all 0.15s ease-out;
+                        white-space: nowrap;
+                        text-decoration: none;
+                        :hover {
+                          opacity: 0.75;
+                        }
+                      `}
+                      type="submit"
+                      disabled={!canSubmit}
+                    >
                       Submit
                     </button>
                   </p>
@@ -396,6 +483,13 @@ const RsvpPage = () => {
     </>
   );
 };
+
+const selectHoverStyles = css`
+  :hover {
+    background-color: var(--color-red-200);
+    opacity: 0.75;
+  }
+`;
 
 // TODO: Netfify: helper function
 // const encode = (data) => {
