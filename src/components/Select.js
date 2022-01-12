@@ -6,7 +6,12 @@ const Select = (props) => {
   const [
     field,
     fieldOptions,
-    { options, emptyOptionText = "- Select an option -", ...rest },
+    {
+      options,
+      emptyOptionText = "- Select an option -",
+      disableEmptyOption = true,
+      ...rest
+    },
   ] = splitFormProps(props);
 
   const {
@@ -22,8 +27,15 @@ const Select = (props) => {
 
   return (
     <>
-      <select {...rest} value={value} onChange={handleSelectChange}>
-        <option disabled value="">
+      <select
+        value={value}
+        css={css`
+          outline: ${error ? "1px solid red" : "none"};
+        `}
+        onChange={handleSelectChange}
+        {...rest}
+      >
+        <option disabled={disableEmptyOption} value="">
           {emptyOptionText}
         </option>
         {options.map((option) => (
@@ -33,13 +45,13 @@ const Select = (props) => {
         ))}
       </select>{" "}
       {isTouched && error ? (
-        <span
+        <div
           css={css`
             color: red;
           `}
         >
           <em>{error}</em>
-        </span>
+        </div>
       ) : null}
     </>
   );
