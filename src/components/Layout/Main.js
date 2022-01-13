@@ -7,7 +7,6 @@ const Main = ({ className, children }) => {
     <main
       className={className}
       css={css`
-        grid-area: main;
         padding: var(--site-content-padding);
       `}
     >

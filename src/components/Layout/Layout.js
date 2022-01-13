@@ -11,7 +11,6 @@ const Layout = ({ className, children }) => {
       className={className}
       css={css`
         position: relative;
-        min-height: calc(100vh - var(--global-header-height));
         margin: 0 auto;
         max-width: var(--site-max-width);
       `}
