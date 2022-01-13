@@ -130,9 +130,23 @@ const RsvpPage = () => {
     <>
       <SEO title="RSVP" />
       <MainLayout>
-        <h1>RSVP</h1>
+        <h1
+          css={css`
+            text-align: center;
+          `}
+        >
+          RSVP
+        </h1>
         {isSubmitted ? (
-          <>Your RSVP has been recorded. Thanks for letting us know! 👍</>
+          <>
+            <div
+              css={css`
+                text-align: center;
+              `}
+            >
+              Your RSVP has been recorded. Thanks for letting us know! 👍
+            </div>
+          </>
         ) : (
           <>
             {!invite && (
@@ -142,6 +156,7 @@ const RsvpPage = () => {
                   getInvite(inviteCode);
                 }}
                 css={css`
+                  text-align: center;
                   > * {
                     margin: 1em 0;
                   }
@@ -260,7 +275,12 @@ const RsvpPage = () => {
                   </div>
                 )}
 
-                <Form>
+                <Form
+                  css={css`
+                    width: 500px;
+                    text-align: center;
+                  `}
+                >
                   <input type="hidden" name="form-name" value="contact" />
 
                   <p>Who in your party is coming?</p>
@@ -275,7 +295,7 @@ const RsvpPage = () => {
                         css={css`
                           display: flex;
                           width: 100%;
-                          max-width: 400px;
+                          max-width: var(--forms-input-checkbox-width);
                           align-items: center;
                           justify-content: flex-start;
                           padding: 1em 0;
