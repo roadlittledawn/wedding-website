@@ -19,6 +19,10 @@ const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
       href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
       rel="stylesheet"
     />,
+    <link
+      href="https://fonts.googleapis.com/css2?family=Diplomata&display=swap"
+      rel="stylesheet"
+    />,
   ]);
 };
 

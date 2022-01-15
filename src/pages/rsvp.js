@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { navigate } from "@reach/router";
 import { css } from "@emotion/react";
 import { request, gql } from "graphql-request";
 import slugify from "react-slugify";
@@ -249,36 +248,89 @@ const RsvpPage = () => {
                 {invite.personalMessage && (
                   <div
                     css={css`
-                      border: 1px solid #b39a83;
-                      border-radius: 6px;
-                      margin: 1em;
+                        position: relative;
+                        background-color: rgba(#000, 0.5);
+                        width: 100%;
+                        max-width: 600px;
+                        padding: 5px;
+                        border: 2px solid #b78846;
+                        margin: 3em 0;
+                        &:before,
+                        &:after {
+                          content: "•";
+                          position: absolute;
+                          width: 14px;
+                          height: 14px;
+                          font-size: 14px;
+                          color: #b78846;
+                          border: 2px solid #b78846;
+                          line-height: 12px;
+                          top: 5px;
+                          text-align: center;
+                        }
+                        &:before {
+                          left: 5px;
+                        }
+                        &:after {
+                          right: 5px;
+                        }
+  
+                      }
                     `}
                   >
                     <div
                       css={css`
-                        background-color: #b39a83;
-                        padding: 0.5em;
-                        font-size: 0.8em;
-                        font-weight: bold;
+                        position: relative;
+                        border: 2px solid #b78846;
+                        padding: 40px;
+                        &:before,
+                        &:after {
+                          content: "•";
+                          position: absolute;
+                          width: 14px;
+                          height: 14px;
+                          font-size: 14px;
+                          color: #b78846;
+                          border: 2px solid #b78846;
+                          line-height: 12px;
+                          bottom: -2px;
+                          text-align: center;
+                        }
+                        &:before {
+                          left: -2px;
+                        }
+                        &:after {
+                          right: -2px;
+                        }
                       `}
                     >
-                      A NOTE FROM THE HOSTS
+                      <div
+                        css={css`
+                          font-family: var(--guest-card-fancy-font);
+                          transform: scaleY(1.5);
+                          text-align: center;
+                          letter-spacing: 3px;
+                        `}
+                      >
+                        A NOTE FROM YOUR HOSTS
+                      </div>
+                      <div
+                        css={css`
+                          padding: 1em;
+                        `}
+                        dangerouslySetInnerHTML={{
+                          __html: invite.personalMessage,
+                        }}
+                      ></div>
                     </div>
-                    <div
-                      css={css`
-                        padding: 1em;
-                      `}
-                      dangerouslySetInnerHTML={{
-                        __html: invite.personalMessage,
-                      }}
-                    ></div>
                   </div>
                 )}
 
                 <Form
                   css={css`
-                    width: 500px;
+                    width: 100%;
                     text-align: center;
+                    max-width: 500px;
                   `}
                 >
                   <input type="hidden" name="form-name" value="contact" />
