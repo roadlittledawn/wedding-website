@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { css } from "@emotion/react";
-import { siteOptions } from "../../utils/constants";
 import mountainsImage from "../../images/MountainFooter.png";
 
 const Footer = ({ className }) => {
