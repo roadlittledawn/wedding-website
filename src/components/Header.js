@@ -96,7 +96,6 @@ const Header = ({ className }) => {
 
                 > li {
                   transition: all 0.2s ease-out;
-                  /* color: var(--secondary-text-color); */
 
                   &:not(:first-of-type) {
                     margin-left: 1em;

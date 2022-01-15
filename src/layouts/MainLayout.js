@@ -10,23 +10,31 @@ import MobileNav from "../components/MobileNav";
 const MainLayout = ({ children }) => {
   return (
     <>
-      <Header />
-      <MobileNav />
-      <Layout>
-        <Layout.Main
-          css={css`
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          `}
-        >
-          {children}
-        </Layout.Main>
-
+      <div
+        css={css`
+          display: flex;
+          min-height: 100vh;
+          flex-direction: column;
+          justify-content: flex-start;
+        `}
+      >
+        <Header />
+        <MobileNav />
+        <Layout>
+          <Layout.Main
+            css={css`
+              max-width: 1232px;
+              margin: 0 auto;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            `}
+          >
+            {children}
+          </Layout.Main>
+        </Layout>
         <Layout.Footer />
-      </Layout>
+      </div>
     </>
   );
 };
