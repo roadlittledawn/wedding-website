@@ -517,7 +517,11 @@ const RsvpPage = () => {
                     </div>
                   ))}
 
-                  <p>
+                  <div
+                    css={css`
+                      margin: 3em 0;
+                    `}
+                  >
                     <button
                       css={css`
                         display: inline-flex;
@@ -544,7 +548,7 @@ const RsvpPage = () => {
                     >
                       Submit
                     </button>
-                  </p>
+                  </div>
                 </Form>
                 {/* </form> */}
               </>
