@@ -10,7 +10,7 @@ const Footer = ({ className }) => {
       className={className}
       css={css`
         width: 100%;
-        margin-top: 2em;
+        margin-top: auto;
         display: flex;
       `}
     >
