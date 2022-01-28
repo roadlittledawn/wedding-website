@@ -30,7 +30,10 @@ const WhereToStayPage = () => {
           <h2>Willamette Valley / Wine Country</h2>
           <p>
             Most towns in wine country are relatively small. So lodging options
-            can be a bit limited. We recommend looking on AirBnb, VRBO, Vacasa
+            can be a bit limited. We recommend looking on{" "}
+            <a href="https://www.airbnb.com/">AirBnb</a>,{" "}
+            <a href="https://www.vrbo.com/">VRBO</a>,{" "}
+            <a href="https://www.vacasa.com/">Vacasa</a>
             first.
           </p>
           <p>If you want to stay in / near one of the towns, we recommend:</p>

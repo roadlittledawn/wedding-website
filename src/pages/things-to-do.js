@@ -35,7 +35,7 @@ const ThingsToDoPage = () => {
             loading="lazy"
           />
 
-          <h2>Willammette Valley / Wine Country</h2>
+          <h2>Willamette Valley / Wine Country</h2>
           <p>
             Many wineries/vineyards require making an appointment ahead of time.
           </p>
