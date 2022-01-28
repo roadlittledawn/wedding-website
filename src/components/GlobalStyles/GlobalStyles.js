@@ -90,8 +90,9 @@ const GlobalStyles = ({ layout }) => (
 
       h1 {
         line-height: 1.15;
-        font-weight: bold;
+        font-weight: lighter;
         margin-bottom: 1rem;
+        font-size: 3em;
       }
 
       h2 {
