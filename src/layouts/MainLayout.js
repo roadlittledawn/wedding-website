@@ -24,6 +24,7 @@ const MainLayout = ({ children }) => {
           <Layout.Main
             css={css`
               max-width: 1232px;
+              width: 100%;
               margin: 0 auto;
               display: flex;
               align-items: center;

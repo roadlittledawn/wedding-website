@@ -104,6 +104,9 @@ const Header = ({ className }) => {
               `}
             >
               <li>
+                <NavLink to={"/our-big-day"}>Our big day</NavLink>
+              </li>
+              <li>
                 <NavLink to={"/where-to-stay"}>Where to stay</NavLink>
               </li>
               <li>

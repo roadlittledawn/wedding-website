@@ -42,6 +42,8 @@ const MobileNavMenu = ({ open }) => {
         }
       `}
     >
+      <Link to={"/our-big-day"}>Our big day</Link>
+
       <Link to={"/where-to-stay"}>Where to stay</Link>
 
       <Link to={"/things-to-do"}>Things to do</Link>
