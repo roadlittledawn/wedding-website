@@ -2,6 +2,7 @@ import React from "react";
 import { css } from "@emotion/react";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
+import { siteOptions } from "../utils/constants";
 
 const OurBigDayPage = () => {
   return (
@@ -11,12 +12,22 @@ const OurBigDayPage = () => {
         <h1>Our big day</h1>
         <div
           css={css`
-            width: 600px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
+            @media screen and (max-width: ${siteOptions.layout
+                .mobileBreakpoint}) {
+              flex-direction: column;
+            }
           `}
         >
           <div
             css={css`
-              text-align: center;
+              flex-grow: 1;
+              font-size: 2em;
             `}
           >
             Saturday, June 5, 2022 @ 4pm
@@ -27,7 +38,11 @@ const OurBigDayPage = () => {
             <br />
             Carlton, Oregon
           </div>
-          <div>
+          <div
+            css={css`
+              flex-grow: 2;
+            `}
+          >
             <iframe
               src="https://www.google.com/maps/d/u/0/embed?mid=1HjihE1DSS7H7xXLSeeOlUkFlKMEFGdtq&ehbc=2E312F"
               width="100%"
@@ -38,6 +53,7 @@ const OurBigDayPage = () => {
             />
           </div>
         </div>
+
         <h2>Transportation</h2>
         <div>
           <p>TBD bus info</p>
@@ -70,7 +86,7 @@ const OurBigDayPage = () => {
               <b>7:30p</b>: Smokey Brights take the stage
             </li>
             <li>
-              <b>10p</b>: That's a wrap!
+              <b>10p</b>: Closing time
             </li>
           </ul>
         </div>

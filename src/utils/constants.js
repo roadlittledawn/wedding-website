@@ -1,7 +1,7 @@
 export const siteOptions = {
   layout: {
     contentPadding: "2rem",
-    maxWidth: "100%",
+    maxWidth: "1232px",
     mobileBreakpoint: "760px",
   },
 };

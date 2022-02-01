@@ -23,7 +23,6 @@ const MainLayout = ({ children }) => {
         <Layout>
           <Layout.Main
             css={css`
-              max-width: 1232px;
               width: 100%;
               margin: 0 auto;
               display: flex;
