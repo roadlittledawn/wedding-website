@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 import { siteOptions } from "../utils/constants";
+import abbeyRoad from "../images/Abbey-Road-farm-2-1.jpg";
 
 const OurBigDayPage = () => {
   return (
@@ -30,7 +31,7 @@ const OurBigDayPage = () => {
               font-size: 2em;
             `}
           >
-            Saturday, June 5, 2022 @ 4pm
+            Saturday, June 4, 2022 @ 4pm
             <br />
             Abbey Road Farm
             <br />
@@ -41,22 +42,37 @@ const OurBigDayPage = () => {
           <div
             css={css`
               flex-grow: 2;
+              @media screen and (max-width: ${siteOptions.layout
+                  .mobileBreakpoint}) {
+                width: 100%;
+              }
             `}
           >
-            <iframe
-              src="https://www.google.com/maps/d/u/0/embed?mid=1HjihE1DSS7H7xXLSeeOlUkFlKMEFGdtq&ehbc=2E312F"
-              width="100%"
-              height="480"
-              style={{ border: 0 }}
-              allowfullscreen="true"
-              loading="lazy"
-            />
+            <img width="100%;" src={abbeyRoad} />
           </div>
         </div>
 
-        <h2>Transportation</h2>
+        <h2>Getting there</h2>
         <div>
           <p>TBD bus info</p>
+        </div>
+        <div
+          css={css`
+            flex-grow: 2;
+            @media screen and (max-width: ${siteOptions.layout
+                .mobileBreakpoint}) {
+              width: 100%;
+            }
+          `}
+        >
+          <iframe
+            src="https://www.google.com/maps/d/u/0/embed?mid=1HjihE1DSS7H7xXLSeeOlUkFlKMEFGdtq&ehbc=2E312F"
+            width="100%"
+            height="480"
+            style={{ border: 0 }}
+            allowfullscreen="true"
+            loading="lazy"
+          />
         </div>
         <h2>The venue</h2>
         <div
