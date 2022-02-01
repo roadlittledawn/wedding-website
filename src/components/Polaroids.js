@@ -5,6 +5,13 @@ import { siteOptions } from "../utils/constants";
 
 const VARIANTS = {
   FAN: "fan",
+  ALBUM: "album",
+};
+
+const getRandomNumber = (range) => {
+  let num = Math.floor(Math.random() * range) + 1; // this will get a number between 1 and 99;
+  num *= Math.round(Math.random()) ? 1 : -1; // this will add minus sign in 50% of cases
+  return num;
 };
 
 const styles = {
@@ -39,13 +46,39 @@ const styles = {
         height: 26em;
         width: 26em;
       }
-      @media screen and (max-width: ${siteOptions.layout.mobileBreakpoint}) {
+      @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
         > :not(:nth-child(2)) {
           display: none;
         }
         > * {
           margin-right: 0;
         }
+      }
+    `,
+    [VARIANTS.ALBUM]: css`
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      > * {
+        position: relative;
+        overflow: hidden;
+        margin: 1em;
+        background: #fff;
+        padding: 1.5em 1.5em 6em 1.5em;
+        box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+      }
+      img {
+        object-fit: cover;
+        height: 26em;
+        width: 26em;
+      }
+      @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
+        > :not(:nth-child(2)) {
+          flex-direction: column;
+        }
+        /* > * {
+          margin: 1em 0;
+        } */
       }
     `,
   },
@@ -59,7 +92,15 @@ const Polaroids = ({ images, featuredImg, variant }) => {
       `}
     >
       {images.map((img) => (
-        <div>
+        <div
+          css={css`
+            transform: scale(0.8, 0.8) rotate(${getRandomNumber(20)}deg)
+              translateY(${getRandomNumber(75)}px);
+            @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
+              transform: scale(0.8, 0.8) rotate(${getRandomNumber(10)}deg);
+            }
+          `}
+        >
           <img src={img} />
         </div>
       ))}

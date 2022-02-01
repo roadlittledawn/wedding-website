@@ -31,7 +31,7 @@ const OurBigDayPage = () => {
               font-size: 2em;
             `}
           >
-            Saturday, June 4, 2022 @ 4pm
+            Saturday, June 4th, 2022 @ 4pm
             <br />
             Abbey Road Farm
             <br />
@@ -55,13 +55,17 @@ const OurBigDayPage = () => {
         <h2>Getting there</h2>
         <div>
           <p>TBD bus info</p>
+          <p>
+            Or{" "}
+            <a href="https://www.google.com/maps/dir//45.2906054,-123.1041744/@45.290584,-123.1742142,12z">
+              click here
+            </a>{" "}
+            for Google Directions
+          </p>
         </div>
         <div
           css={css`
-            flex-grow: 2;
-            @media screen and (max-width: ${siteOptions.layout
-                .mobileBreakpoint}) {
-              width: 100%;
+            width: 50%;
             }
           `}
         >
