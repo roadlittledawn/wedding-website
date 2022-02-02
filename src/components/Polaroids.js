@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { css } from "@emotion/react";
+import random from "random";
 import { siteOptions } from "../utils/constants";
 
 const VARIANTS = {
@@ -9,8 +10,10 @@ const VARIANTS = {
 };
 
 const getRandomNumber = (range) => {
-  let num = Math.floor(Math.random() * range) + 1; // this will get a number between 1 and 99;
-  num *= Math.round(Math.random()) ? 1 : -1; // this will add minus sign in 50% of cases
+  // let num = Math.floor(Math.random() * range) + 1;
+  // num *= Math.round(Math.random()) ? 1 : -1;
+  let num = random.int(-Math.abs(range), range);
+  // num *= random.boolean() ? 1 : -1;
   return num;
 };
 
