@@ -9,11 +9,15 @@ const VARIANTS = {
   ALBUM: "album",
 };
 
-const getRandomNumber = (range) => {
-  // let num = Math.floor(Math.random() * range) + 1;
-  // num *= Math.round(Math.random()) ? 1 : -1;
-  let num = random.int(-Math.abs(range), range);
-  // num *= random.boolean() ? 1 : -1;
+const getRandomNumber = (range, idx = null) => {
+  let num = 0;
+
+  if (idx) {
+    num = random.int(range);
+    num *= idx % 2 ? 1 : -1;
+  } else {
+    num = random.int(-Math.abs(range), range);
+  }
   return num;
 };
 
@@ -79,9 +83,6 @@ const styles = {
         > :not(:nth-child(2)) {
           flex-direction: column;
         }
-        /* > * {
-          margin: 1em 0;
-        } */
       }
     `,
   },
@@ -94,11 +95,12 @@ const Polaroids = ({ images, featuredImg, variant }) => {
         ${styles.variant[variant]}
       `}
     >
-      {images.map((img) => (
+      {images.map((img, idx) => (
         <div
           css={css`
-            transform: scale(0.8, 0.8) rotate(${getRandomNumber(20)}deg)
-              translateY(${getRandomNumber(75)}px);
+            transform: scale(0.8, 0.8) rotate(${getRandomNumber(20, idx)}deg)
+              translateY(${getRandomNumber(75)}px)
+              translateX(${getRandomNumber(35)}px);
             @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
               transform: scale(0.8, 0.8) rotate(${getRandomNumber(10)}deg);
             }
