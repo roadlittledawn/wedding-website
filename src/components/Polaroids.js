@@ -101,7 +101,22 @@ const Polaroids = ({ images, featuredImg, variant }) => {
             }
           `}
         >
-          <img src={img} />
+          <img src={img.src} />
+          {img.annotation && (
+            <div
+              css={css`
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, -20%);
+                font-size: 1.75em;
+                font-family: var(--polaroid-annotation-font);
+              `}
+              dangerouslySetInnerHTML={{
+                __html: img.annotation,
+              }}
+            ></div>
+          )}
         </div>
       ))}
     </div>
@@ -111,9 +126,15 @@ const Polaroids = ({ images, featuredImg, variant }) => {
 Polaroids.VARIANT = VARIANTS;
 
 Polaroids.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string,
+      annotation: PropTypes.string,
+    })
+  ).isRequired,
   variant: PropTypes.oneOf(Object.values(Polaroids.VARIANT)).isRequired,
   featuredImg: PropTypes.string,
+  annotation: PropTypes.string,
 };
 
 export default Polaroids;

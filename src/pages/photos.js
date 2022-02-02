@@ -19,12 +19,34 @@ const PhotosPage = () => {
             <Polaroids
               variant="album"
               images={[
-                trailStarePhoto,
-                meadowPhoto,
-                trailWalkPhoto,
-                trailStarePhoto,
-                meadowPhoto,
-                trailWalkPhoto,
+                {
+                  src: trailStarePhoto,
+                  annotation: "Washington Park<br/>September 2021",
+                },
+                {
+                  src: trailWalkPhoto,
+                  annotation: "Washington Park<br/>September 2021",
+                },
+                ,
+                {
+                  src: meadowPhoto,
+                  annotation: "Washington Park<br/>September 2021",
+                },
+                ,
+                {
+                  src: trailStarePhoto,
+                  annotation: "Washington Park<br/>September 2021",
+                },
+                {
+                  src: trailWalkPhoto,
+                  annotation: "Washington Park<br/>September 2021",
+                },
+                ,
+                {
+                  src: meadowPhoto,
+                  annotation: "Washington Park<br/>September 2021",
+                },
+                ,
               ]}
             />
           </div>
