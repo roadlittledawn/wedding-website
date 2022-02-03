@@ -10,14 +10,17 @@ const VARIANTS = {
 };
 
 const getRandomNumber = (range, idx = null) => {
+  // let num = Math.floor(Math.random() * range) + 1;
   let num = 0;
 
-  if (idx) {
+  if (idx !== null) {
     num = random.int(range);
     num *= idx % 2 ? 1 : -1;
   } else {
     num = random.int(-Math.abs(range), range);
+    // num *= Math.round(Math.random()) ? 1 : -1;
   }
+
   return num;
 };
 
