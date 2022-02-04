@@ -3,13 +3,14 @@ import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 import { css } from "@emotion/react";
 import { siteOptions } from "../utils/constants";
+import PageTitle from "../components/PageTitle";
 
 const ThingsToDoPage = () => {
   return (
     <>
       <SEO title="Brie & Clinton | The Band" />
       <MainLayout>
-        <h1>The band</h1>
+        <PageTitle title="The band" />
         <div
           css={css`
             max-width: 600px;

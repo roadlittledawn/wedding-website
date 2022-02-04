@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { Carousel } from "react-carousel-minimal";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
+import PageTitle from "../components/PageTitle";
 import { siteOptions } from "../utils/constants";
 
 import abbeyRoadLogo from "../images/abbey-road-farm-logo.png";
@@ -41,7 +42,7 @@ const OurBigDayPage = () => {
     <>
       <SEO title="Photos" />
       <MainLayout>
-        <h1>Our big day</h1>
+        <PageTitle title="Our big day" />
         <div
           css={css`
             > * {

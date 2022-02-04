@@ -8,6 +8,7 @@ import LoadingIcon from "../components/LoadingIcon";
 import { useForm } from "react-form";
 import Select from "../components/Select";
 import check from "../images/check.svg";
+import PageTitle from "../components/PageTitle";
 
 const endpoint = "https://b-c-rsvp-service.herokuapp.com/graphql";
 
@@ -59,25 +60,8 @@ const RsvpPage = () => {
   } = useForm({
     onSubmit: () => {
       recordResponseInDb();
-      // TODO: Netlify: record submission in netfliy
-      // const form = e.target;
-      // fetch("/", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      //   body: encode({
-      //     "form-name": form.getAttribute("name"),
-      //     ...state,
-      //   }),
-      // })
-      //   .then(() => navigate(form.getAttribute("action")))
-      //   .catch((error) => alert(error));
     },
   });
-
-  // TODO: Netlify: form state
-  // const handleChange = (e) => {
-  //   setState({ ...state, [e.target.name]: e.target.value });
-  // };
 
   const updateGuestData = (guestIdx, propName, e) => {
     const { target } = e;
@@ -129,13 +113,8 @@ const RsvpPage = () => {
     <>
       <SEO title="RSVP" />
       <MainLayout>
-        <h1
-          css={css`
-            text-align: center;
-          `}
-        >
-          RSVP
-        </h1>
+        <PageTitle title="RSVP" />
+
         {isSubmitted ? (
           <>
             <div
@@ -234,16 +213,6 @@ const RsvpPage = () => {
                   table has what they need.
                 </p>
                 <h2>{invite.partyName}</h2>
-                {/* <form
-                  name="rsvp-test1"
-                  method="POST"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
-                  onSubmit={submitForm}
-                  css={css`
-                    font-size: 1.25em;
-                  `}
-                > */}
 
                 {invite.personalMessage && (
                   <div
@@ -566,12 +535,5 @@ const selectHoverStyles = css`
     opacity: 0.75;
   }
 `;
-
-// TODO: Netfify: helper function
-// const encode = (data) => {
-//   return Object.keys(data)
-//     .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-//     .join("&");
-// };
 
 export default RsvpPage;

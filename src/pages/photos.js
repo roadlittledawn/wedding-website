@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 import Polaroids from "../components/Polaroids";
+import PageTitle from "../components/PageTitle";
 
 import trailStarePhoto from "../images/trail-stare.jpg";
 import trailWalkPhoto from "../images/trail-walk.jpg";
@@ -40,7 +41,7 @@ const PhotosPage = () => {
     <>
       <SEO title="Photos" />
       <MainLayout>
-        <h1>Photos</h1>
+        <PageTitle title="Photos" />
         <div
           css={css`
             max-width: 1500px;
