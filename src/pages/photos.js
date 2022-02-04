@@ -41,10 +41,12 @@ const PhotosPage = () => {
       <SEO title="Photos" />
       <MainLayout>
         <h1>Photos</h1>
-        <div>
-          <div>
-            <Polaroids variant="album" images={images} />
-          </div>
+        <div
+          css={css`
+            max-width: 1500px;
+          `}
+        >
+          <Polaroids variant="album" images={images} />
         </div>
       </MainLayout>
     </>

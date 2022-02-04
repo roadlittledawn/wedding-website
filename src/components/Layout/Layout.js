@@ -13,7 +13,6 @@ const Layout = ({ className, children }) => {
         position: relative;
         margin: 0 auto;
         width: 100%;
-        max-width: var(--site-max-width);
       `}
     >
       {children}

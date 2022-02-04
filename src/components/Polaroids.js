@@ -101,9 +101,9 @@ const Polaroids = ({ images, featuredImg, variant }) => {
       {images.map((img, idx) => (
         <div
           css={css`
-            transform: scale(0.8, 0.8) rotate(${getRandomNumber(20, idx)}deg)
-              translateY(${getRandomNumber(75)}px)
-              translateX(${getRandomNumber(75)}px);
+            transform: scale(0.8, 0.8) rotate(${getRandomNumber(6, idx)}deg)
+              translateY(${getRandomNumber(15)}px)
+              translateX(${getRandomNumber(15)}px);
             @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
               transform: scale(0.8, 0.8) rotate(${getRandomNumber(10)}deg);
             }
