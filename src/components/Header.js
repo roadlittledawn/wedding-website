@@ -28,7 +28,7 @@ const Header = ({ className }) => {
             height: var(--global-header-height);
             display: flex;
             flex-direction: column;
-            max-width: var(--site-max-width);
+            width: 100%;
             margin: 0 auto;
             padding: 0 var(--site-content-padding);
             align-items: center;
@@ -93,9 +93,11 @@ const Header = ({ className }) => {
                 display: flex;
                 align-items: center;
                 list-style-type: none;
+                text-align: center;
 
                 > li {
                   transition: all 0.2s ease-out;
+                  padding: 0.5em 1em;
 
                   &:not(:first-of-type) {
                     margin-left: 1em;
@@ -103,21 +105,17 @@ const Header = ({ className }) => {
                 }
               `}
             >
-              <li>
-                <NavLink to={"/where-to-stay"}>Where to stay</NavLink>
-              </li>
-              <li>
-                <NavLink to={"/things-to-do"}>Things to do</NavLink>
-              </li>
-              <li>
-                <NavLink to={"/band"}>The Band</NavLink>
-              </li>
-              <li>
-                <NavLink to={"/photos"}>Photos</NavLink>
-              </li>
-              <li>
-                <NavLink to={"/rsvp"}>RSVP</NavLink>
-              </li>
+              <NavLink to={"/our-big-day"}>Our big day</NavLink>
+
+              <NavLink to={"/where-to-stay"}>Where to stay</NavLink>
+
+              <NavLink to={"/things-to-do"}>Things to do</NavLink>
+
+              <NavLink to={"/band"}>The Band</NavLink>
+
+              <NavLink to={"/photos"}>Photos</NavLink>
+
+              <NavLink to={"/rsvp"}>RSVP</NavLink>
             </ul>
           </nav>
         </div>

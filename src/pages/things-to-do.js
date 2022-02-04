@@ -3,13 +3,15 @@ import MainLayout from "../layouts/MainLayout";
 import SEO from "../components/SEO";
 import { css } from "@emotion/react";
 import { siteOptions } from "../utils/constants";
+import PageTitle from "../components/PageTitle";
 
 const ThingsToDoPage = () => {
   return (
     <>
       <SEO title="Brie & Clinton | The Band" />
       <MainLayout>
-        <h1>Things to do</h1>
+        <PageTitle title="Things to do" />
+
         <h2>Portland</h2>
         <div
           css={css`

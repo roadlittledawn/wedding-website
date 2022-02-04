@@ -32,7 +32,20 @@ const HomePage = () => {
           <div>
             <Polaroids
               variant="fan"
-              images={[trailStarePhoto, meadowPhoto, trailWalkPhoto]}
+              images={[
+                {
+                  src: trailStarePhoto,
+                },
+                ,
+                {
+                  src: meadowPhoto,
+                },
+                ,
+                {
+                  src: trailWalkPhoto,
+                },
+                ,
+              ]}
               featuredImg={meadowPhoto}
             />
           </div>

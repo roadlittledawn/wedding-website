@@ -12,46 +12,38 @@ const NavLink = ({ to, children }) => {
   if (isInternal) {
     return (
       <>
-        <Link
+        <li
           css={css`
-            padding: 0.5em 1em;
-            color: var(--color-teal-400);
             ${isCurrent &&
-            "background-color: var(--color-teal-100); border-radius: .25rem;"}
+            "background-color: var(--color-red-400); border-radius: .25rem; color: var(--color-white);"}
 
-            .dark-mode & {
-              color: var(--color-teal-300);
-              ${isCurrent &&
-              "background-color: var(--color-teal-700); border-radius: .25rem;"};
-            }
             :hover {
-              color: var(--color-teal-300);
             }
           `}
-          to={to}
         >
-          {children}
-        </Link>
+          <Link to={to}>{children}</Link>
+        </li>
       </>
     );
   } else {
     return (
       <>
-        <a
-          css={css`
-            padding: 0.5em 1em;
-            color: var(--color-teal-300);
-
-            :hover {
+        <li>
+          <a
+            css={css`
               color: var(--color-teal-300);
-            }
-          `}
-          href={to}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {children}
-        </a>
+
+              :hover {
+                color: var(--color-teal-300);
+              }
+            `}
+            href={to}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {children}
+          </a>
+        </li>
       </>
     );
   }
