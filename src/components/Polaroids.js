@@ -86,6 +86,11 @@ const styles = {
         > :not(:nth-child(2)) {
           flex-direction: column;
         }
+        img {
+          object-fit: cover;
+          height: 23em;
+          width: 23em;
+        }
       }
     `,
   },
@@ -117,6 +122,7 @@ const Polaroids = ({ images, featuredImg, variant }) => {
                 bottom: 0;
                 left: 50%;
                 transform: translate(-50%, -20%);
+                text-align: center;
                 font-size: 1.75em;
                 font-family: var(--polaroid-annotation-font);
               `}
