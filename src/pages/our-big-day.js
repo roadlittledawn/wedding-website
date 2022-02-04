@@ -59,7 +59,7 @@ const OurBigDayPage = () => {
           <section css={twoColumnFlex}>
             <div
               css={css`
-                font-size: 2em;
+                font-size: 1.5em;
                 text-align: center;
               `}
             >
