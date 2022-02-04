@@ -1,10 +1,27 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { css } from "@emotion/react";
+import random from "random";
 import { siteOptions } from "../utils/constants";
 
 const VARIANTS = {
   FAN: "fan",
+  ALBUM: "album",
+};
+
+const getRandomNumber = (range, idx = null) => {
+  // let num = Math.floor(Math.random() * range) + 1;
+  let num = 0;
+
+  if (idx !== null) {
+    num = random.int(range);
+    num *= idx % 2 ? 1 : -1;
+  } else {
+    num = random.int(-Math.abs(range), range);
+    // num *= Math.round(Math.random()) ? 1 : -1;
+  }
+
+  return num;
 };
 
 const styles = {
@@ -39,12 +56,35 @@ const styles = {
         height: 26em;
         width: 26em;
       }
-      @media screen and (max-width: ${siteOptions.layout.mobileBreakpoint}) {
+      @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
         > :not(:nth-child(2)) {
           display: none;
         }
         > * {
           margin-right: 0;
+        }
+      }
+    `,
+    [VARIANTS.ALBUM]: css`
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      > * {
+        position: relative;
+        overflow: hidden;
+        margin: 1em;
+        background: #fff;
+        padding: 1.5em 1.5em 6em 1.5em;
+        box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+      }
+      img {
+        object-fit: cover;
+        height: 26em;
+        width: 26em;
+      }
+      @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
+        > :not(:nth-child(2)) {
+          flex-direction: column;
         }
       }
     `,
@@ -58,9 +98,33 @@ const Polaroids = ({ images, featuredImg, variant }) => {
         ${styles.variant[variant]}
       `}
     >
-      {images.map((img) => (
-        <div>
-          <img src={img} />
+      {images.map((img, idx) => (
+        <div
+          css={css`
+            transform: scale(0.8, 0.8) rotate(${getRandomNumber(6, idx)}deg)
+              translateY(${getRandomNumber(15)}px)
+              translateX(${getRandomNumber(15)}px);
+            @media screen and (max-width: ${siteOptions.layout.maxWidth}) {
+              transform: scale(0.8, 0.8) rotate(${getRandomNumber(10)}deg);
+            }
+          `}
+        >
+          <img src={img.src} />
+          {img.annotation && (
+            <div
+              css={css`
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, -20%);
+                font-size: 1.75em;
+                font-family: var(--polaroid-annotation-font);
+              `}
+              dangerouslySetInnerHTML={{
+                __html: img.annotation,
+              }}
+            ></div>
+          )}
         </div>
       ))}
     </div>
@@ -70,9 +134,15 @@ const Polaroids = ({ images, featuredImg, variant }) => {
 Polaroids.VARIANT = VARIANTS;
 
 Polaroids.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string,
+      annotation: PropTypes.string,
+    })
+  ).isRequired,
   variant: PropTypes.oneOf(Object.values(Polaroids.VARIANT)).isRequired,
   featuredImg: PropTypes.string,
+  annotation: PropTypes.string,
 };
 
 export default Polaroids;

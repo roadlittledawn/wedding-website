@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://brie-clinton-wedding.netlify.app",
-    title: "Brie and Clinton Wedding Website",
+    siteUrl: "https://brie-clinton-wedding.com",
+    title: "Brie and Clinton's Wedding Website",
     titleTemplate: "%s | Brie and Clinton Wedding",
   },
   plugins: [
