@@ -45,8 +45,6 @@ const recordResponseMutation = gql`
 `;
 
 const RsvpPage = () => {
-  // TODO: Netlify: form state
-  // const [state, setState] = useState({});
   const [inviteCode, setInviteCode] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const [inviteFound, setInviteFound] = useState(null);
@@ -204,15 +202,23 @@ const RsvpPage = () => {
               </>
             )}
             {invite && (
-              <>
+              <div
+                css={css`
+                  max-width: 600px;
+                `}
+              >
                 <p>
                   The meal is <b>family style</b>, which means you'll have your
-                  pick from various dishes at your table. We just need to know
-                  if anyone in your party is vegetarian / vegan, or if they have
-                  any other dietary restrictions / food allergies to ensure each
-                  table has what they need.
+                  pick from various dishes at your table. We just have a few
+                  questions for y'all so we can plan accordingly.
                 </p>
-                <h2>{invite.partyName}</h2>
+                <h2
+                  css={css`
+                    text-align: center;
+                  `}
+                >
+                  {invite.partyName}
+                </h2>
 
                 {invite.personalMessage && (
                   <div
@@ -299,7 +305,6 @@ const RsvpPage = () => {
                   css={css`
                     width: 100%;
                     text-align: center;
-                    max-width: 500px;
                   `}
                 >
                   <input type="hidden" name="form-name" value="contact" />
@@ -316,6 +321,7 @@ const RsvpPage = () => {
                         css={css`
                           display: flex;
                           width: 100%;
+                          margin: 1em auto 0 auto;
                           max-width: var(--forms-input-checkbox-width);
                           align-items: center;
                           justify-content: flex-start;
@@ -323,7 +329,9 @@ const RsvpPage = () => {
                           border: 1px solid var(--color-red-400);
                           border-radius: 6px;
                           ${invite.guestList[index].isGoing &&
-                          `background-color: var(--color-red-200);`}
+                          `background-color: var(--color-red-200);
+                          border-bottom-right-radius: 0;
+                          border-bottom-left-radius: 0;`}
                           :hover {
                             cursor: pointer;
                           }
@@ -382,6 +390,10 @@ const RsvpPage = () => {
                       {invite?.guestList[index].isGoing && (
                         <div
                           css={css`
+                            border: 1px dotted var(--color-red-400);
+                            max-width: 500px;
+                            margin: 0 auto;
+                            padding: 1em;
                             > * {
                               margin: 1em 0;
                             }
@@ -519,8 +531,7 @@ const RsvpPage = () => {
                     </button>
                   </div>
                 </Form>
-                {/* </form> */}
-              </>
+              </div>
             )}
           </>
         )}
