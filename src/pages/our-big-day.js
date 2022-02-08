@@ -230,7 +230,15 @@ const OurBigDayPage = () => {
                   named after drag queens 🤣
                 </p>
               </div>
-              <div>
+              <div
+                css={css`
+                  width: 700px;
+                  @media screen and (max-width: ${siteOptions.layout
+                      .mobileBreakpoint}) {
+                    width: 100%;
+                  }
+                `}
+              >
                 <Carousel
                   data={abbeyRoadImages}
                   width="100%"
@@ -241,8 +249,8 @@ const OurBigDayPage = () => {
                   slideNumberStyle={slideNumberStyle}
                   automatic={false}
                   dots={true}
-                  slideBackgroundColor="darkgrey"
-                  slideImageFit="cover"
+                  slideBackgroundColor="#1b1818d9"
+                  slideImageFit="contain"
                   thumbnails={false}
                   style={{
                     textAlign: "center",
