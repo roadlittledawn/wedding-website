@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const photoAlbumPath = path.join(process.cwd(), "src/images/photo-album");
+const photoAlbumPath = path.join(process.cwd(), "src/images/venue");
 
 const main = () => {
   fs.readdir(photoAlbumPath, (err, files) => {
@@ -9,11 +9,11 @@ const main = () => {
       return console.error(`Unable to read dir: ${err}`);
     }
     files.forEach((filename) => {
-      const basename = filename.replace(".jpeg", "");
+      const basename = filename.replace(".jpg", "");
       const importStmt = `import ${basename} from '../images/photo-album/${filename}'`;
-      // console.log(importStmt);
+      console.log(importStmt);
       const imageObjStr = `{ src: ${basename}, annotation: "" },`;
-      console.log(imageObjStr);
+      // console.log(imageObjStr);
     });
   });
 };
