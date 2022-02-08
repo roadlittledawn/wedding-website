@@ -22,7 +22,10 @@ const WhereToStayPage = () => {
           `}
         >
           <h2>Portland</h2>
-          <p>Check out our map of places we recommend staying in Portland</p>
+          <p>
+            Check out our map of hotels / general areas we recommend staying in
+            Portland.
+          </p>
           <iframe
             src="https://www.google.com/maps/d/u/0/embed?mid=11VwVdRePHbJNL1EJs3GM4bHXESPdsx4y"
             width="100%"
@@ -34,8 +37,7 @@ const WhereToStayPage = () => {
             can be a bit limited. We recommend looking on{" "}
             <a href="https://www.airbnb.com/">AirBnb</a>,{" "}
             <a href="https://www.vrbo.com/">VRBO</a>,{" "}
-            <a href="https://www.vacasa.com/">Vacasa</a>
-            first.
+            <a href="https://www.vacasa.com/">Vacasa</a> first.
           </p>
           <p>If you want to stay in / near one of the towns, we recommend:</p>
           <ul>

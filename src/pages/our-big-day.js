@@ -9,9 +9,17 @@ import { siteOptions } from "../utils/constants";
 import abbeyRoadLogo from "../images/abbey-road-farm-logo.png";
 
 import abbeyRoad from "../images/Abbey-Road-farm-2-1.jpg";
+import IMG_0411 from "../images/venue/IMG_0411.jpeg";
+import IMG_0443 from "../images/venue/IMG_0443.jpeg";
+import abbeyRoadFarm009 from "../images/venue/abbey-road-farm-009_orig.jpg";
+import abbeyRoadFarm002 from "../images/venue/abbey-road-farm-misc-002_orig.jpg";
+import abbeyRoadFarm034 from "../images/venue/abbey-road-farm-misc-034_orig.jpg";
+import abbeyRoadFarm037 from "../images/venue/abbey-road-farm-misc-037_orig.jpg";
+import abbeyRoadFarm075 from "../images/venue/abbey-road-farm-misc-075_orig.jpg";
+import abbeyRoadFarm038 from "../images/venue/photo-jun-19-8-07-44-am-1_orig.jpg";
 
 const sectionHeadingStyles = css`
-  font-size: 2em;
+  font-size: 2.5em;
   margin: 2em 0;
   text-align: center;
 `;
@@ -24,6 +32,13 @@ const twoColumnFlex = css`
   & > *:not(h2) {
     margin: 2em;
   }
+  @media screen and (max-width: ${siteOptions.layout.mobileBreakpoint}) {
+    flex-direction: column;
+    & > *:not(h2) {
+      margin: 1em 0;
+      width: 100%;
+    }
+  }
 `;
 
 const captionStyle = {
@@ -35,7 +50,17 @@ const slideNumberStyle = {
   fontWeight: "bold",
 };
 
-const abbeyRoadImages = [{ image: abbeyRoad }, { image: abbeyRoad }];
+const abbeyRoadImages = [
+  { image: abbeyRoad },
+  { image: IMG_0411 },
+  { image: IMG_0443 },
+  { image: abbeyRoadFarm009 },
+  { image: abbeyRoadFarm002 },
+  { image: abbeyRoadFarm034 },
+  { image: abbeyRoadFarm037 },
+  { image: abbeyRoadFarm075 },
+  { image: abbeyRoadFarm038 },
+];
 
 const OurBigDayPage = () => {
   return (
@@ -45,15 +70,15 @@ const OurBigDayPage = () => {
         <PageTitle title="Our big day" />
         <div
           css={css`
-            > * {
+            section {
               margin: 3em 0;
-              & > *:not(h2) {
-                margin: 2em;
-              }
             }
             @media screen and (max-width: ${siteOptions.layout
                 .mobileBreakpoint}) {
               flex-direction: column;
+              > * {
+                margin: 1em 0;
+              }
             }
           `}
         >
@@ -61,12 +86,14 @@ const OurBigDayPage = () => {
             <div
               css={css`
                 font-size: 1.5em;
+                font-family: var(--polaroid-annotation-font);
                 text-align: center;
               `}
             >
               <p
                 css={css`
                   margin-bottom: 2em;
+                  font-size: 1.5em;
                 `}
               >
                 Saturday, June 4th, 2022 @ 4pm
@@ -83,6 +110,7 @@ const OurBigDayPage = () => {
             <div
               css={css`
                 flex-grow: 2;
+                max-width: 700px;
                 @media screen and (max-width: ${siteOptions.layout
                     .mobileBreakpoint}) {
                   width: 100%;
@@ -91,7 +119,7 @@ const OurBigDayPage = () => {
             >
               <img
                 css={css`
-                  border-radius: 6px;
+                  border-radius: 12px;
                 `}
                 width="100%"
                 src={abbeyRoad}
@@ -101,14 +129,14 @@ const OurBigDayPage = () => {
           <section>
             <h2 css={sectionHeadingStyles}>Getting there</h2>
             <div css={twoColumnFlex}>
-              <div>
-                <p>TBD bus info</p>
+              <div
+                css={css`
+                  max-width: 500px;
+                `}
+              >
                 <p>
-                  Or{" "}
-                  <a href="https://www.google.com/maps/dir//45.2906054,-123.1041744/@45.290584,-123.1742142,12z">
-                    click here
-                  </a>{" "}
-                  for Google Directions
+                  We are arranging bus transportation between Portland and Abbey
+                  Road Farm. Stay tuned for details.
                 </p>
               </div>
               <div
@@ -206,7 +234,15 @@ const OurBigDayPage = () => {
                   named after drag queens 🤣
                 </p>
               </div>
-              <div>
+              <div
+                css={css`
+                  width: 700px;
+                  @media screen and (max-width: ${siteOptions.layout
+                      .mobileBreakpoint}) {
+                    width: 100%;
+                  }
+                `}
+              >
                 <Carousel
                   data={abbeyRoadImages}
                   width="100%"
@@ -217,8 +253,8 @@ const OurBigDayPage = () => {
                   slideNumberStyle={slideNumberStyle}
                   automatic={false}
                   dots={true}
-                  slideBackgroundColor="darkgrey"
-                  slideImageFit="cover"
+                  slideBackgroundColor="#1b1818d9"
+                  slideImageFit="contain"
                   thumbnails={false}
                   style={{
                     textAlign: "center",
