@@ -19,7 +19,7 @@ import abbeyRoadFarm075 from "../images/venue/abbey-road-farm-misc-075_orig.jpg"
 import abbeyRoadFarm038 from "../images/venue/photo-jun-19-8-07-44-am-1_orig.jpg";
 
 const sectionHeadingStyles = css`
-  font-size: 2em;
+  font-size: 2.5em;
   margin: 2em 0;
   text-align: center;
 `;
@@ -129,7 +129,11 @@ const OurBigDayPage = () => {
           <section>
             <h2 css={sectionHeadingStyles}>Getting there</h2>
             <div css={twoColumnFlex}>
-              <div>
+              <div
+                css={css`
+                  max-width: 500px;
+                `}
+              >
                 <p>
                   We are arranging bus transportation between Portland and Abbey
                   Road Farm. Stay tuned for details.
