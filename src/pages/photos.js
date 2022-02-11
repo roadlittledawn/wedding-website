@@ -61,7 +61,7 @@ const images = [
   },
   { src: img_engagement_day, annotation: "We got engaged!<br/>April 4 2021" },
   { src: IMG_1142, annotation: "Coyote Wall<br/>5-9-21" },
-  { src: IMG_2763, annotation: "Maui Bday!<br/>3-4-19" },
+  { src: IMG_2763, annotation: "Hawaiian Bday!<br/>Maui 3-4-19" },
   { src: IMG_2814, annotation: "Huge coco-nuts<br/>Maui Bday 3-4-19" },
   { src: IMG_2815, annotation: "Every gal's avo dream<br/>Maui Bday 3-4-19" },
   { src: IMG_2918, annotation: "Drinks and snorkeling<br/>Maui Bday 3-4-19" },
