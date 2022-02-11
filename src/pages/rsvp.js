@@ -391,6 +391,7 @@ const RsvpPage = () => {
                         <div
                           css={css`
                             border: 1px dotted var(--color-red-400);
+                            border-top: none;
                             max-width: 500px;
                             margin: 0 auto;
                             padding: 1em;
@@ -489,7 +490,8 @@ const RsvpPage = () => {
                                 updateGuestData(index, "dietaryRestrictions", e)
                               }
                               css={css`
-                                width: 350px;
+                                width: 100%;
+                                max-width: 350px;
                               `}
                             />
                           </div>
