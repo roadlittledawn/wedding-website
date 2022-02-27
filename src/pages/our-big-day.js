@@ -184,7 +184,10 @@ const OurBigDayPage = () => {
                   <b>6p</b>: Dinner
                 </li>
                 <li>
-                  <b>7:30p</b>: Smokey Brights take the stage
+                  <b>7:30p</b>: Music by DJLX
+                </li>
+                <li>
+                  <b>8:30p</b>: Music by Smokey Brights
                 </li>
                 <li>
                   <b>10p</b>: Closing time
