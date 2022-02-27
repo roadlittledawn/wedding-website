@@ -121,6 +121,7 @@ const Polaroids = ({ images, featuredImg, variant }) => {
                 position: absolute;
                 bottom: 0;
                 left: 50%;
+                width: 100%;
                 transform: translate(-50%, -20%);
                 text-align: center;
                 font-size: 1.75em;

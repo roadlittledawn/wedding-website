@@ -175,16 +175,19 @@ const OurBigDayPage = () => {
                 `}
               >
                 <li>
-                  <b>4pm</b>: Ceremony
+                  <b>4p</b>: Ceremony
                 </li>
                 <li>
-                  <b>5p - 6p</b>: Cocktail hour
+                  <b>5p</b>: Cocktail hour
                 </li>
                 <li>
                   <b>6p</b>: Dinner
                 </li>
                 <li>
-                  <b>7:30p</b>: Smokey Brights take the stage
+                  <b>7:30p</b>: Music by DJLX
+                </li>
+                <li>
+                  <b>8:30p</b>: Music by Smokey Brights
                 </li>
                 <li>
                   <b>10p</b>: Closing time
@@ -221,11 +224,11 @@ const OurBigDayPage = () => {
                   needed sunny day in the height of the pandemic in June 2020.
                 </p>
                 <p>
-                  We love it because it's chill, they play fun music, and they
-                  have a good variety of wines for all palettes (reds, whites,
-                  sparkles). They grow and make some of their own, but they also
-                  operate as a co-op where they serve/sell fellow winemakers'
-                  varietals.
+                  We love it because it's comparitively chill, they play good
+                  music, and they have a good variety of wines for all palettes
+                  (reds, whites, sparkles). They grow and make some of their
+                  own, but they also operate as a co-op where they serve/sell
+                  fellow winemakers' varietals.
                 </p>
                 <p>
                   We'll be serving a good selection of their wine. But also feel
