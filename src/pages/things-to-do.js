@@ -8,7 +8,7 @@ import PageTitle from "../components/PageTitle";
 const ThingsToDoPage = () => {
   return (
     <>
-      <SEO title="Brie & Clinton | The Band" />
+      <SEO title="Brie & Clinton | Things to do" />
       <MainLayout>
         <PageTitle title="Things to do" />
 
@@ -58,12 +58,28 @@ const ThingsToDoPage = () => {
           <p>
             Willamette Valley is a fairly young wine producing region, first
             established in the early 1970s. It's best known for its world class
-            Pinot Noir. Other varietals of growing acclaim include pinot gris,
-            chardonnay, and riesling.
+            pinot noir. Most wineries will serve pinot (some only serve it).
+            Other varietals of increasing acclaim include{" "}
+            <a
+              href="https://www.willamettewines.com/about-the-valley/chardonnay/"
+              target="_blank"
+            >
+              chardonnay
+            </a>
+            , pinot gris, and riesling. If you're looking to find a winery with
+            a specific varietal, try{" "}
+            <a
+              href="https://www.willamettewines.com/wineries-and-vineyards/by-variety/"
+              target="_blank"
+            >
+              searching by variety
+            </a>
+            . I'd be remiss if I didn't tell you to be on the lookout for 2014
+            and 2015 vintages of pinot noir ;)
           </p>
           <p>
             Sure, we've been to our fair share of winereis/vineyards in{" "}
-            <a href="https://www.willamettewines.com/">Willamette Valley</a>
+            <a href="https://www.willamettewines.com/">Willamette Valley</a>{" "}
             over the years. But with about 700 wineries in the Willammette
             Valley, we've barely scratched the surface. Here's a map of some of
             our favorite places we've been / know about. But there are obviously
