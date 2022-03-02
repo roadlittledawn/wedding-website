@@ -8,7 +8,7 @@ import PageTitle from "../components/PageTitle";
 const ThingsToDoPage = () => {
   return (
     <>
-      <SEO title="Brie & Clinton | The Band" />
+      <SEO title="Brie & Clinton | Things to do" />
       <MainLayout>
         <PageTitle title="Things to do" />
 
