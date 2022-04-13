@@ -17,6 +17,7 @@ import abbeyRoadFarm034 from "../images/venue/abbey-road-farm-misc-034_orig.jpg"
 import abbeyRoadFarm037 from "../images/venue/abbey-road-farm-misc-037_orig.jpg";
 import abbeyRoadFarm075 from "../images/venue/abbey-road-farm-misc-075_orig.jpg";
 import abbeyRoadFarm038 from "../images/venue/photo-jun-19-8-07-44-am-1_orig.jpg";
+import blueStarBus from "../images/blue-star-bus.png";
 
 const sectionHeadingStyles = css`
   font-size: 2.5em;
@@ -135,9 +136,30 @@ const OurBigDayPage = () => {
                 `}
               >
                 <p>
-                  We are arranging bus transportation between Portland and Abbey
-                  Road Farm. Stay tuned for details.
+                  For those of you staying in Portland, we've arranged for a
+                  coach bus to drive you to / from Abbey Road. The bus will
+                  depart <b>promptly at 230pm</b> from The{" "}
+                  <a
+                    href="https://g.page/markspencerhotel?share"
+                    target="_blank"
+                  >
+                    Mark Spencer Hotel, 409 SW 11th Ave
+                  </a>{" "}
+                  in downtown Portland (see location on map).{" "}
                 </p>
+                <p>
+                  The bus will depart Abbey Road after the wedding at 10:15pm.
+                </p>
+                <p>Look for a Blue Star bus like this:</p>
+                <div>
+                  <img
+                    src={blueStarBus}
+                    css={css`
+                      max-width: 100%;
+                      border-radius: 12px;
+                    `}
+                  />
+                </div>
               </div>
               <div
                 css={css`
